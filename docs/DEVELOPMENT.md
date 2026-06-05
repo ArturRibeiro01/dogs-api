@@ -84,6 +84,23 @@ feature/* -> develop -> main
 - `main` representa produção;
 - PR para `main` deve vir de `develop`.
 
+## CI
+
+O workflow de CI roda em pull requests e pushes para:
+
+```txt
+develop
+main
+```
+
+O check principal se chama:
+
+```txt
+Typecheck, test and build
+```
+
+Use esse nome ao configurar required status checks no GitHub.
+
 ## Secrets
 
 Nunca versionar arquivos reais de ambiente:

@@ -34,6 +34,20 @@ Comando local equivalente:
 yarn validate
 ```
 
+Workflow versionado:
+
+```txt
+.github/workflows/ci.yml
+```
+
+Required status check recomendado no GitHub:
+
+```txt
+Typecheck, test and build
+```
+
+PRs para `main` devem vir da branch `develop`; o workflow falha quando a origem for diferente.
+
 ## Deploy Dev
 
 Planejado:

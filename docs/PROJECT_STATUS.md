@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Documentação base configurada.
+CI configurada.
 
 ## Já Definido
 
@@ -17,9 +17,11 @@ Documentação base configurada.
 
 ## Próximo Marco
 
-Concluir CI com:
+Concluir configuração e validação de ambiente com:
 
-- GitHub Actions rodando `yarn validate`.
+- módulo de configuração;
+- validação de variáveis de ambiente;
+- `.env.example`.
 
 ## Concluído
 
@@ -30,6 +32,7 @@ Concluir CI com:
 - `02-quality-tooling`: ESLint, Prettier, Jest, Husky, lint-staged e `yarn validate`.
 - Teste mínimo de compilação do `AppModule`.
 - `03-docs-and-codex-notes`: docs de desenvolvimento, arquitetura, ambientes, segurança, deploy e notas do Codex.
+- `04-ci-validate`: GitHub Actions com install, lint, format check, typecheck, test, build e bloqueio de PR para `main` fora de `develop`.
 
 ## Pendências Relevantes
 
