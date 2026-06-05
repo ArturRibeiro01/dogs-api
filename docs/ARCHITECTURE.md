@@ -76,6 +76,7 @@ Database:
 
 - encapsula Prisma Client;
 - concentra integração com PostgreSQL.
+- expõe `PrismaService` por `DatabaseModule`.
 
 Common:
 
@@ -152,7 +153,28 @@ Erro:
 
 ## Fora Do Scaffold Atual
 
-- Prisma ainda não foi configurado.
 - Health check ainda não foi implementado.
 - Swagger ainda não foi configurado.
 - Autenticação ainda não foi implementada.
+
+## Prisma
+
+Guia conceitual:
+
+```txt
+docs/PRISMA_GUIDE.md
+```
+
+O schema inicial está em:
+
+```txt
+prisma/schema.prisma
+```
+
+O seed inicial está em:
+
+```txt
+prisma/seed.ts
+```
+
+O `DatabaseModule` existe, mas ainda não é importado pelo `AppModule` para evitar conexão obrigatória com banco antes dos endpoints de domínio existirem.

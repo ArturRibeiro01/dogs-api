@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Configuração de ambiente validada.
+Prisma e Supabase configurados.
 
 ## Já Definido
 
@@ -17,7 +17,7 @@ Configuração de ambiente validada.
 
 ## Próximo Marco
 
-Concluir Prisma e Supabase com schema inicial, Prisma Client e seed de raças.
+Concluir health check e Swagger.
 
 ## Concluído
 
@@ -30,6 +30,7 @@ Concluir Prisma e Supabase com schema inicial, Prisma Client e seed de raças.
 - `03-docs-and-codex-notes`: docs de desenvolvimento, arquitetura, ambientes, segurança, deploy e notas do Codex.
 - `04-ci-validate`: GitHub Actions com install, lint, format check, typecheck, test, build e bloqueio de PR para `main` fora de `develop`.
 - `05-config-env-validation`: `.env.example`, módulo de configuração, validação de envs no boot e config tipada.
+- `06-prisma-supabase`: Prisma schema inicial, Prisma Client, DatabaseModule, PrismaService e seed de raças.
 
 ## Pendências Relevantes
 

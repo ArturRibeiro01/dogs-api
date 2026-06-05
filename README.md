@@ -53,3 +53,4 @@ yarn start
 - `docs/ENVIRONMENTS.md`
 - `docs/SECURITY.md`
 - `docs/DEPLOYMENT.md`
+- `docs/PRISMA_GUIDE.md`
