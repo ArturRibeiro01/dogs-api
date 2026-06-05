@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app.module';
 import { AppConfig } from './config/configuration';
+import { setupSwagger } from './swagger';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,8 @@ async function bootstrap(): Promise<void> {
   app.enableCors({
     origin: appConfig.corsOrigins,
   });
+
+  setupSwagger(app, configService);
 
   await app.listen(appConfig.port);
 }
