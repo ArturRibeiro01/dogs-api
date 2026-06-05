@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Scaffold inicial do backend.
+Qualidade local configurada.
 
 ## Já Definido
 
@@ -17,14 +17,11 @@ Scaffold inicial do backend.
 
 ## Próximo Marco
 
-Concluir base de qualidade local com:
+Concluir documentação complementar e CI com:
 
-- quality gates locais;
-- ESLint;
-- Prettier;
-- Husky;
-- lint-staged;
-- comando `yarn validate`.
+- docs de desenvolvimento, arquitetura, ambientes, segurança e deploy;
+- `.codex/project.md` revisado;
+- GitHub Actions rodando `yarn validate`.
 
 ## Concluído
 
@@ -32,6 +29,8 @@ Concluir base de qualidade local com:
 - Estrutura inicial de `src/`, `test/`, `nest-cli.json` e configs TypeScript.
 - Scripts básicos: `yarn dev`, `yarn build` e `yarn start`.
 - README atualizado com setup local mínimo.
+- `02-quality-tooling`: ESLint, Prettier, Jest, Husky, lint-staged e `yarn validate`.
+- Teste mínimo de compilação do `AppModule`.
 
 ## Pendências Relevantes
 
