@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Qualidade local configurada.
+Documentação base configurada.
 
 ## Já Definido
 
@@ -17,10 +17,8 @@ Qualidade local configurada.
 
 ## Próximo Marco
 
-Concluir documentação complementar e CI com:
+Concluir CI com:
 
-- docs de desenvolvimento, arquitetura, ambientes, segurança e deploy;
-- `.codex/project.md` revisado;
 - GitHub Actions rodando `yarn validate`.
 
 ## Concluído
@@ -31,6 +29,7 @@ Concluir documentação complementar e CI com:
 - README atualizado com setup local mínimo.
 - `02-quality-tooling`: ESLint, Prettier, Jest, Husky, lint-staged e `yarn validate`.
 - Teste mínimo de compilação do `AppModule`.
+- `03-docs-and-codex-notes`: docs de desenvolvimento, arquitetura, ambientes, segurança, deploy e notas do Codex.
 
 ## Pendências Relevantes
 

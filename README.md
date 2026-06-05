@@ -48,3 +48,8 @@ yarn start
 - `docs/BACKEND_API_PLAN.md`
 - `docs/CODEX_BACKEND_HANDOFF.md`
 - `docs/INITIAL_SCAFFOLD_PLAN.md`
+- `docs/DEVELOPMENT.md`
+- `docs/ARCHITECTURE.md`
+- `docs/ENVIRONMENTS.md`
+- `docs/SECURITY.md`
+- `docs/DEPLOYMENT.md`
