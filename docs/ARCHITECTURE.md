@@ -138,6 +138,12 @@ Erro:
 }
 ```
 
+Detalhes do contrato ficam em:
+
+```txt
+docs/API_CONTRACT.md
+```
+
 ## Módulos Planejados
 
 - `health`: status operacional.

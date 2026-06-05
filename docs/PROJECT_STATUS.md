@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Health check e Swagger configurados.
+Contrato de respostas e erros configurado.
 
 ## Já Definido
 
@@ -17,7 +17,7 @@ Health check e Swagger configurados.
 
 ## Próximo Marco
 
-Concluir contrato de respostas e erros.
+Concluir autenticação e usuários.
 
 ## Concluído
 
@@ -32,6 +32,7 @@ Concluir contrato de respostas e erros.
 - `05-config-env-validation`: `.env.example`, módulo de configuração, validação de envs no boot e config tipada.
 - `06-prisma-supabase`: Prisma schema inicial, Prisma Client, DatabaseModule, PrismaService e seed de raças.
 - `07-health-swagger`: `GET /health`, Swagger em `/docs` e OpenAPI JSON em `/docs-json`.
+- `08-error-response-contract`: helpers de resposta, códigos de erro estáveis, `AppException` e filtro global de exceções.
 
 ## Pendências Relevantes
 
