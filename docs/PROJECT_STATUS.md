@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Planejamento de scaffold, arquitetura, ambientes e backlog.
+Scaffold inicial do backend.
 
 ## Já Definido
 
@@ -17,16 +17,21 @@ Planejamento de scaffold, arquitetura, ambientes e backlog.
 
 ## Próximo Marco
 
-Concluir scaffold inicial com:
+Concluir base de qualidade local com:
 
-- NestJS rodando;
 - quality gates locais;
-- Prisma configurado;
-- health check;
-- Swagger;
-- CI;
-- docs base;
-- backlog local priorizado.
+- ESLint;
+- Prettier;
+- Husky;
+- lint-staged;
+- comando `yarn validate`.
+
+## Concluído
+
+- `01-bootstrap-nestjs-api`: scaffold NestJS inicial com TypeScript e Yarn.
+- Estrutura inicial de `src/`, `test/`, `nest-cli.json` e configs TypeScript.
+- Scripts básicos: `yarn dev`, `yarn build` e `yarn start`.
+- README atualizado com setup local mínimo.
 
 ## Pendências Relevantes
 
