@@ -1,0 +1,289 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+enum DogSex {
+  male
+  female
+  unknown
+}
+
+enum DogSize {
+  small
+  medium
+  large
+}
+
+enum DogInterest {
+  friendship
+  walks
+  community
+  breeding
+}
+
+enum DogMembershipRole {
+  owner
+  editor
+}
+
+enum DogMembershipStatus {
+  active
+  pending
+  removed
+}
+
+enum PostVisibility {
+  public
+  private
+  unlisted
+}
+
+enum ContactInterestStatus {
+  pending
+  accepted
+  rejected
+  cancelled
+}
+
+enum AnalyticsEventType {
+  post_view
+  dog_profile_view
+  post_created
+  dog_created
+}
+
+model User {
+  id                  String               @id @default(uuid()) @db.Uuid
+  username            String               @unique
+  name                String
+  email               String               @unique
+  passwordHash        String
+  avatarUrl           String?
+  bio                 String?
+  city                String?
+  state               String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  memberships         DogMembership[]      @relation("UserDogMemberships")
+  invitedMemberships  DogMembership[]      @relation("InvitedDogMemberships")
+  createdInvites      DogInvite[]          @relation("CreatedDogInvites")
+  authoredPosts       Post[]
+  uploadedMedia       Media[]
+  postLikes           PostLike[]
+  dogFavorites        DogFavorite[]
+  contactInterests    ContactInterest[]
+  analyticsEvents     AnalyticsEvent[]
+  passwordResetTokens PasswordResetToken[]
+  refreshTokens       RefreshToken[]
+}
+
+model Dog {
+  id               String            @id @default(uuid()) @db.Uuid
+  slug             String            @unique
+  name             String
+  breedId          String            @db.Uuid
+  birthDate        DateTime?
+  sex              DogSex            @default(unknown)
+  size             DogSize?
+  weight           Decimal?          @db.Decimal(5, 2)
+  bio              String?
+  avatarUrl        String?
+  city             String?
+  state            String?
+  interests        DogInterest[]     @default([])
+  isPublic         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  breed            Breed             @relation(fields: [breedId], references: [id])
+  memberships      DogMembership[]
+  invites          DogInvite[]
+  posts            Post[]
+  media            Media[]
+  favorites        DogFavorite[]
+  contactInterests ContactInterest[]
+  analyticsEvents  AnalyticsEvent[]
+
+  @@index([breedId])
+  @@index([city, state])
+}
+
+model DogMembership {
+  id              String              @id @default(uuid()) @db.Uuid
+  dogId           String              @db.Uuid
+  userId          String              @db.Uuid
+  role            DogMembershipRole
+  status          DogMembershipStatus @default(active)
+  invitedByUserId String?             @db.Uuid
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  dog             Dog                 @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  user            User                @relation("UserDogMemberships", fields: [userId], references: [id], onDelete: Cascade)
+  invitedBy       User?               @relation("InvitedDogMemberships", fields: [invitedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([dogId, userId])
+  @@index([userId])
+  @@index([dogId, status])
+}
+
+model DogInvite {
+  id              String            @id @default(uuid()) @db.Uuid
+  dogId           String            @db.Uuid
+  email           String
+  role            DogMembershipRole
+  tokenHash       String
+  expiresAt       DateTime
+  acceptedAt      DateTime?
+  createdByUserId String            @db.Uuid
+  createdAt       DateTime          @default(now())
+  dog             Dog               @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  createdBy       User              @relation("CreatedDogInvites", fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  @@unique([tokenHash])
+  @@index([dogId])
+  @@index([email])
+  @@index([expiresAt])
+}
+
+model Breed {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  dogs      Dog[]
+}
+
+model Post {
+  id              String          @id @default(uuid()) @db.Uuid
+  dogId           String          @db.Uuid
+  authorUserId    String          @db.Uuid
+  caption         String?
+  visibility      PostVisibility  @default(public)
+  publishedAt     DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  deletedAt       DateTime?
+  dog             Dog             @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  author          User            @relation(fields: [authorUserId], references: [id], onDelete: Cascade)
+  media           Media[]
+  likes           PostLike[]
+  analyticsEvents AnalyticsEvent[]
+
+  @@index([dogId])
+  @@index([authorUserId])
+  @@index([visibility, publishedAt])
+  @@index([deletedAt])
+}
+
+model Media {
+  id            String   @id @default(uuid()) @db.Uuid
+  postId        String   @db.Uuid
+  dogId         String   @db.Uuid
+  uploadedByUserId String @db.Uuid
+  storageBucket String
+  storageKey    String
+  url           String
+  mimeType      String
+  size          Int
+  width         Int?
+  height        Int?
+  createdAt     DateTime @default(now())
+  post          Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  dog           Dog      @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  uploadedBy    User     @relation(fields: [uploadedByUserId], references: [id], onDelete: Cascade)
+
+  @@unique([storageBucket, storageKey])
+  @@index([postId])
+  @@index([dogId])
+}
+
+model PostLike {
+  id        String   @id @default(uuid()) @db.Uuid
+  postId    String   @db.Uuid
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([userId])
+}
+
+model DogFavorite {
+  id        String   @id @default(uuid()) @db.Uuid
+  dogId     String   @db.Uuid
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now())
+  dog       Dog      @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([dogId, userId])
+  @@index([userId])
+}
+
+model ContactInterest {
+  id         String                @id @default(uuid()) @db.Uuid
+  dogId      String                @db.Uuid
+  fromUserId String                @db.Uuid
+  message    String?
+  status     ContactInterestStatus @default(pending)
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+  dog        Dog                   @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  fromUser   User                  @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
+
+  @@index([dogId, status])
+  @@index([fromUserId])
+}
+
+model AnalyticsEvent {
+  id        String             @id @default(uuid()) @db.Uuid
+  eventType AnalyticsEventType
+  userId    String?            @db.Uuid
+  dogId     String?            @db.Uuid
+  postId    String?            @db.Uuid
+  metadata  Json?
+  createdAt DateTime           @default(now())
+  user      User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  dog       Dog?               @relation(fields: [dogId], references: [id], onDelete: SetNull)
+  post      Post?              @relation(fields: [postId], references: [id], onDelete: SetNull)
+
+  @@index([eventType, createdAt])
+  @@index([userId])
+  @@index([dogId])
+  @@index([postId])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tokenHash])
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tokenHash])
+  @@index([userId])
+  @@index([expiresAt])
+}

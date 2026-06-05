@@ -120,6 +120,8 @@ Quando Prisma for configurado:
 - `DATABASE_URL` pode usar conexão pooled para runtime;
 - `DIRECT_DATABASE_URL` deve usar conexão direta para migrations.
 
+Scripts `prisma:generate` e `prisma:validate` usam URL local fake quando essas variáveis não existem, porque eles não precisam conectar no banco. Scripts de migration e seed exigem variáveis reais.
+
 ## Arquivos Que Não Devem Ser Versionados
 
 ```txt
