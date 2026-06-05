@@ -153,8 +153,6 @@ Erro:
 
 ## Fora Do Scaffold Atual
 
-- Health check ainda não foi implementado.
-- Swagger ainda não foi configurado.
 - Autenticação ainda não foi implementada.
 
 ## Prisma

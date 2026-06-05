@@ -34,6 +34,14 @@ Por padrão a aplicação sobe em:
 http://localhost:3333
 ```
 
+Endpoints de infraestrutura:
+
+```txt
+GET /health
+GET /docs
+GET /docs-json
+```
+
 ## Scripts
 
 ```sh

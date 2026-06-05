@@ -82,7 +82,13 @@ URL padrão:
 http://localhost:3333
 ```
 
-Observação: nesta fase inicial ainda não há endpoint público implementado. O health check será criado em issue própria.
+Endpoints úteis:
+
+```txt
+GET /health
+GET /docs
+GET /docs-json
+```
 
 ## Branch Flow
 

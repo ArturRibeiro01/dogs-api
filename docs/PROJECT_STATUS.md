@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Prisma e Supabase configurados.
+Health check e Swagger configurados.
 
 ## Já Definido
 
@@ -17,7 +17,7 @@ Prisma e Supabase configurados.
 
 ## Próximo Marco
 
-Concluir health check e Swagger.
+Concluir contrato de respostas e erros.
 
 ## Concluído
 
@@ -31,6 +31,7 @@ Concluir health check e Swagger.
 - `04-ci-validate`: GitHub Actions com install, lint, format check, typecheck, test, build e bloqueio de PR para `main` fora de `develop`.
 - `05-config-env-validation`: `.env.example`, módulo de configuração, validação de envs no boot e config tipada.
 - `06-prisma-supabase`: Prisma schema inicial, Prisma Client, DatabaseModule, PrismaService e seed de raças.
+- `07-health-swagger`: `GET /health`, Swagger em `/docs` e OpenAPI JSON em `/docs-json`.
 
 ## Pendências Relevantes
 
