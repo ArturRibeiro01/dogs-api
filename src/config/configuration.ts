@@ -16,14 +16,10 @@ export function createConfiguration(env: Env) {
       url: env.DATABASE_URL,
       directUrl: env.DIRECT_DATABASE_URL,
     },
-    auth: {
-      jwtAccessSecret: env.JWT_ACCESS_SECRET,
-      jwtRefreshSecret: env.JWT_REFRESH_SECRET,
-      accessTokenTtl: env.ACCESS_TOKEN_TTL,
-      refreshTokenTtl: env.REFRESH_TOKEN_TTL,
-    },
     supabase: {
       url: env.SUPABASE_URL,
+      anonKey: env.SUPABASE_ANON_KEY,
+      jwtSecret: env.SUPABASE_JWT_SECRET,
       serviceRoleKey: env.SUPABASE_SERVICE_ROLE_KEY,
       storageBucket: env.SUPABASE_STORAGE_BUCKET,
     },

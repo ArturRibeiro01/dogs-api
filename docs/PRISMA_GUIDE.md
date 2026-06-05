@@ -50,7 +50,8 @@ No Dogs API, o schema descreve entidades como:
 - `Breed`
 - `Post`
 - `Media`
-- `RefreshToken`
+
+Observação: autenticação, refresh token e recuperação de senha ficam no Supabase Auth. O Prisma modela apenas o perfil local `User` e o domínio Dogs.
 
 ## 2. Criar Migrations
 

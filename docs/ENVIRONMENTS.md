@@ -57,12 +57,9 @@ CORS_ORIGINS=http://localhost:5173
 DATABASE_URL=
 DIRECT_DATABASE_URL=
 
-JWT_ACCESS_SECRET=
-JWT_REFRESH_SECRET=
-ACCESS_TOKEN_TTL=15m
-REFRESH_TOKEN_TTL=30d
-
 SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_JWT_SECRET=
 SUPABASE_SERVICE_ROLE_KEY=
 SUPABASE_STORAGE_BUCKET=dogs-media
 
@@ -111,7 +108,7 @@ hml
 prod
 ```
 
-Variáveis de banco, JWT, Supabase, email e Swagger já aparecem no `.env.example`, mas algumas só serão tornadas obrigatórias quando os módulos correspondentes forem implementados.
+Variáveis de banco, Supabase Auth, Supabase Storage, email e Swagger já aparecem no `.env.example`, mas algumas só serão tornadas obrigatórias quando os módulos correspondentes forem implementados.
 
 ## Prisma E Supabase
 

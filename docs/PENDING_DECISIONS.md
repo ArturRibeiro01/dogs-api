@@ -30,17 +30,27 @@ Este arquivo concentra decisões que precisam ser tomadas antes ou durante o sca
 ## Segurança
 
 - Definir se Swagger em produção será público ou protegido por basic auth.
-- Definir rate limits iniciais para login, password reset, uploads e contact interests.
-- Definir TTL exato de access token e refresh token.
-- Definir estratégia de rotação e revogação de refresh token.
+- Definir rate limits iniciais para uploads e contact interests.
+- Confirmar estratégia de validação de token Supabase na Dogs API.
+- Confirmar se usaremos `SUPABASE_JWT_SECRET` localmente ou validação via Supabase Admin API/JWKS.
 - Definir política de CORS por ambiente.
 
 ## Email
 
 - Escolher provider de email.
-- Definir templates para recuperação de senha.
+- Definir se emails transacionais de Auth ficam todos no Supabase Auth ou se alguns serão customizados depois.
 - Definir templates para convite de tutor.
 - Definir comportamento local com `MAIL_PROVIDER=console`.
+
+## Supabase Auth
+
+- Criar projeto Supabase `dogs-dev`.
+- Configurar email/senha.
+- Configurar Google.
+- Configurar Apple.
+- Configurar Azure (Microsoft).
+- Definir redirect URLs do frontend local, dev e prod.
+- Definir se confirmação de email será obrigatória no MVP.
 
 ## Collection HTTP
 

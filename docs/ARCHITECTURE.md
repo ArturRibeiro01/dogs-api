@@ -26,7 +26,7 @@ O perfil social principal é do cachorro, mas a gestão pertence a um ou mais tu
 - Prisma ORM
 - PostgreSQL via Supabase
 - Supabase Storage
-- JWT com refresh token
+- Supabase Auth
 - Swagger/OpenAPI
 
 ## Estrutura De Pastas
@@ -147,7 +147,7 @@ docs/API_CONTRACT.md
 ## Módulos Planejados
 
 - `health`: status operacional.
-- `auth`: register, login, refresh, logout e usuário autenticado.
+- `auth`: validação de token Supabase, sync de perfil local e usuário autenticado.
 - `users`: perfil de tutor.
 - `breeds`: catálogo de raças.
 - `dogs`: perfis de cachorro e memberships.
@@ -182,3 +182,23 @@ prisma/seed.ts
 ```
 
 O `DatabaseModule` existe, mas ainda não é importado pelo `AppModule` para evitar conexão obrigatória com banco antes dos endpoints de domínio existirem.
+
+## Autenticação
+
+Detalhes da decisão:
+
+```txt
+docs/AUTH_STRATEGY.md
+```
+
+Fluxo planejado:
+
+```txt
+Frontend -> Supabase Auth -> access token
+Frontend -> Dogs API com Authorization: Bearer <token>
+Dogs API -> valida token Supabase
+Dogs API -> cria/atualiza perfil local User
+Dogs API -> aplica regras de domínio
+```
+
+Credenciais, social login, refresh token e password reset ficam no Supabase Auth. A Dogs API não salva senha nem tokens próprios.

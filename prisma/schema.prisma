@@ -60,10 +60,10 @@ enum AnalyticsEventType {
 
 model User {
   id                  String               @id @default(uuid()) @db.Uuid
+  supabaseAuthId      String               @unique @db.Uuid
   username            String               @unique
   name                String
   email               String               @unique
-  passwordHash        String
   avatarUrl           String?
   bio                 String?
   city                String?
@@ -79,8 +79,6 @@ model User {
   dogFavorites        DogFavorite[]
   contactInterests    ContactInterest[]
   analyticsEvents     AnalyticsEvent[]
-  passwordResetTokens PasswordResetToken[]
-  refreshTokens       RefreshToken[]
 }
 
 model Dog {
@@ -258,32 +256,4 @@ model AnalyticsEvent {
   @@index([userId])
   @@index([dogId])
   @@index([postId])
-}
-
-model PasswordResetToken {
-  id        String    @id @default(uuid()) @db.Uuid
-  userId    String    @db.Uuid
-  tokenHash String
-  expiresAt DateTime
-  usedAt    DateTime?
-  createdAt DateTime  @default(now())
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([tokenHash])
-  @@index([userId])
-  @@index([expiresAt])
-}
-
-model RefreshToken {
-  id        String    @id @default(uuid()) @db.Uuid
-  userId    String    @db.Uuid
-  tokenHash String
-  expiresAt DateTime
-  revokedAt DateTime?
-  createdAt DateTime  @default(now())
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([tokenHash])
-  @@index([userId])
-  @@index([expiresAt])
 }

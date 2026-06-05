@@ -63,3 +63,4 @@ yarn start
 - `docs/DEPLOYMENT.md`
 - `docs/PRISMA_GUIDE.md`
 - `docs/API_CONTRACT.md`
+- `docs/AUTH_STRATEGY.md`
