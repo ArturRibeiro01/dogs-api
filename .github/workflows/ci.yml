@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+  push:
+    branches:
+      - develop
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Typecheck, test and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate production PR source
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.head_ref != 'develop'
+        run: |
+          echo "Pull requests targeting main must come from develop."
+          echo "Current source branch: ${{ github.head_ref }}"
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.16.0
+          cache: yarn
+
+      - name: Install dependencies
+        run: HUSKY=0 yarn install --frozen-lockfile
+
+      - name: Validate
+        run: yarn validate
+
+      - name: Validate Prisma schema
+        run: |
+          if [ -f prisma/schema.prisma ]; then
+            yarn prisma validate
+          else
+            echo "Prisma schema not found. Skipping Prisma validation."
+          fi
