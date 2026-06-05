@@ -62,6 +62,12 @@ Arquivos staged passam por `lint-staged`:
 
 ## Servidor Local
 
+Crie seu arquivo local de env a partir do exemplo:
+
+```sh
+cp .env.example .env.local
+```
+
 ```sh
 yarn dev
 ```
