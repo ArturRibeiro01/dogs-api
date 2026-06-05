@@ -8,13 +8,16 @@
 - Swagger em `/docs` e OpenAPI JSON em `/docs-json`.
 - Health check em `/health`.
 
-## Comandos Planejados
+## Comandos
 
 - `yarn dev`
 - `yarn validate`
 - `yarn test`
 - `yarn build`
-- `yarn prisma:migrate:dev`
+- `yarn lint`
+- `yarn format:check`
+- `yarn typecheck`
+- `yarn prisma:migrate:dev` quando Prisma existir
 
 ## Preferências De Trabalho
 
@@ -30,3 +33,11 @@
 - Ordem fica em `docs/github-issues/PRIORITY.md`.
 - Status consolidado fica em `docs/PROJECT_STATUS.md`.
 - Decisões pendentes ficam em `docs/PENDING_DECISIONS.md`.
+
+## Docs
+
+- Setup local: `docs/DEVELOPMENT.md`.
+- Arquitetura: `docs/ARCHITECTURE.md`.
+- Ambientes: `docs/ENVIRONMENTS.md`.
+- Segurança: `docs/SECURITY.md`.
+- Deploy planejado: `docs/DEPLOYMENT.md`.
