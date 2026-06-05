@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { AppConfig } from './config/configuration';
 import { setupSwagger } from './swagger';
 
@@ -13,6 +14,8 @@ async function bootstrap(): Promise<void> {
   app.enableCors({
     origin: appConfig.corsOrigins,
   });
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   setupSwagger(app, configService);
 
