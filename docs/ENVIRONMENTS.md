@@ -75,6 +75,44 @@ SWAGGER_BASIC_AUTH_USER=
 SWAGGER_BASIC_AUTH_PASSWORD=
 ```
 
+## Validação No Boot
+
+A API valida variáveis de ambiente ao iniciar. Se uma variável obrigatória estiver ausente ou inválida, a aplicação não sobe.
+
+Arquivos locais lidos pela aplicação:
+
+```txt
+.env.local
+.env
+```
+
+Ordem de prioridade:
+
+```txt
+.env.local -> .env -> ambiente do processo
+```
+
+Variáveis obrigatórias nesta fase:
+
+```txt
+APP_ENV
+PORT
+API_BASE_URL
+WEB_APP_URL
+CORS_ORIGINS
+```
+
+Valores aceitos para `APP_ENV`:
+
+```txt
+local
+dev
+hml
+prod
+```
+
+Variáveis de banco, JWT, Supabase, email e Swagger já aparecem no `.env.example`, mas algumas só serão tornadas obrigatórias quando os módulos correspondentes forem implementados.
+
 ## Prisma E Supabase
 
 Quando Prisma for configurado:
