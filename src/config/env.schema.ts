@@ -25,12 +25,9 @@ export const envSchema = z.object({
   DATABASE_URL: optionalString,
   DIRECT_DATABASE_URL: optionalString,
 
-  JWT_ACCESS_SECRET: optionalString,
-  JWT_REFRESH_SECRET: optionalString,
-  ACCESS_TOKEN_TTL: z.string().trim().default('15m'),
-  REFRESH_TOKEN_TTL: z.string().trim().default('30d'),
-
   SUPABASE_URL: optionalString,
+  SUPABASE_ANON_KEY: optionalString,
+  SUPABASE_JWT_SECRET: optionalString,
   SUPABASE_SERVICE_ROLE_KEY: optionalString,
   SUPABASE_STORAGE_BUCKET: z.string().trim().default('dogs-media'),
 

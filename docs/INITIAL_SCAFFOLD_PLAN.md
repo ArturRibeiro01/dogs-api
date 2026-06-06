@@ -17,6 +17,7 @@ Objetivo desta fase:
 - Swagger em `/docs` e `/docs-json`.
 - Banco PostgreSQL via Supabase.
 - Storage de imagens via Supabase Storage.
+- Autenticação via Supabase Auth.
 - Prisma como ORM e fonte de migrations.
 - Branch flow: `feature/* -> develop -> main`.
 - Ambientes iniciais: `local`, `dev`, `prod`.
@@ -148,8 +149,7 @@ Modelagem inicial deve seguir a spec:
 - `DogFavorite`;
 - `ContactInterest`;
 - `AnalyticsEvent`;
-- `PasswordResetToken`;
-- `RefreshToken`.
+  Autenticação, refresh token e password reset ficam no Supabase Auth.
 
 ## Fase 4: Observabilidade E Contrato
 

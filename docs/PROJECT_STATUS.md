@@ -11,6 +11,7 @@ Contrato de respostas e erros configurado.
 - Backend será separado do frontend `react-dogs`.
 - API será REST e versionada em `/v1`.
 - Stack recomendada: Node.js, TypeScript, NestJS, Prisma, Supabase PostgreSQL, Supabase Storage e Swagger.
+- Autenticação definida via Supabase Auth, com perfil local `User` na Dogs API.
 - Ambientes iniciais: `local`, `dev`, `prod`.
 - Branch flow: `feature/* -> develop -> main`.
 - Domínio principal: `User -> DogMembership -> Dog -> Post`.

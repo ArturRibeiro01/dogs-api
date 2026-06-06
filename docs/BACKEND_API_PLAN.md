@@ -61,7 +61,7 @@ Stack inicial recomendada:
 - Prisma ORM
 - PostgreSQL via Supabase
 - Supabase Storage
-- JWT com refresh token
+- Supabase Auth
 - Swagger/OpenAPI com `@nestjs/swagger`
 - Zod ou class-validator
 - GitHub Actions
@@ -71,8 +71,33 @@ Motivo da escolha:
 - NestJS deixa o backend mais completo e organizado para portfólio.
 - Swagger/OpenAPI é bem suportado no ecossistema NestJS.
 - Prisma acelera modelagem relacional, migrações e queries tipadas.
-- Supabase atende a preferência do projeto e entrega PostgreSQL, Storage e gestão operacional.
+- Supabase atende a preferência do projeto e entrega PostgreSQL, Storage, Auth e gestão operacional.
 - A API própria concentra regras de domínio, permissões e contratos REST.
+
+## Decisão De Autenticação
+
+Usar Supabase Auth como provedor de identidade.
+
+Responsabilidades do Supabase Auth:
+
+- cadastro/login por email e senha;
+- social login, incluindo Google, Apple e Azure (Microsoft);
+- emissão e renovação de tokens;
+- recuperação de senha;
+- gestão de sessão no frontend.
+
+Responsabilidades da Dogs API:
+
+- validar access token Supabase recebido em `Authorization: Bearer`;
+- sincronizar/criar perfil local `User`;
+- aplicar regras de domínio;
+- controlar permissões de tutores, cachorros, posts e uploads.
+
+Motivo:
+
+- social login é sensível e trabalhoso de implementar do zero;
+- Supabase Auth já integra com PostgreSQL, Storage e políticas;
+- o backend continua forte como projeto de portfólio por concentrar domínio, permissões, contratos REST, Swagger, Prisma e testes.
 
 ## Ambientes
 
@@ -132,7 +157,8 @@ Antes de implementar o backend, decidir:
 - provedor de deploy da API
 - quantidade inicial de ambientes
 - se `hml` entra agora ou depois
-- estratégia de email para recuperação de senha e convites
+- estratégia de email para convites de tutor
+- configuração de Supabase Auth para email/senha e provedores sociais
 - tamanho máximo de upload
 - se Swagger em produção será público ou protegido por basic auth
 - se haverá uma collection versionada para Postman, Insomnia ou Bruno

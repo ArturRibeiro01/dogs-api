@@ -94,4 +94,5 @@ Nunca colocar valores reais em:
 - Provedor de deploy da API.
 - Política final de Swagger em produção.
 - Estratégia de migrations em produção.
-- Estratégia de email para recuperação de senha e convites.
+- Estratégia de email para convites.
+- Configuração de Supabase Auth por ambiente.

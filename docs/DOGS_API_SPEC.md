@@ -51,7 +51,7 @@ Recomendação principal:
 - Prisma ORM
 - PostgreSQL via Supabase
 - Supabase Storage
-- JWT com refresh token
+- Supabase Auth
 - Swagger/OpenAPI com `@nestjs/swagger`
 - Zod ou class-validator para validação
 - Docker Compose para desenvolvimento local, quando não usar Supabase local
@@ -63,7 +63,7 @@ Por que essa stack:
 - NestJS deixa o backend com arquitetura clara para portfólio: módulos, controllers, services, guards, pipes e providers.
 - Swagger é bem suportado no ecossistema NestJS.
 - Prisma acelera modelagem relacional, migrations e consultas tipadas.
-- Supabase atende a preferência do projeto e entrega PostgreSQL, storage, painel e gestão de ambientes.
+- Supabase atende a preferência do projeto e entrega PostgreSQL, storage, Auth, painel e gestão de ambientes.
 - O repositório pode ser público porque segredos ficam em variáveis de ambiente e nunca no código.
 
 Alternativas consideradas:
@@ -80,12 +80,14 @@ Responsabilidades do Supabase:
 
 - PostgreSQL gerenciado.
 - Storage de imagens.
+- Supabase Auth para identidade, sessões, email/senha e social login.
 - Ambientes de banco separados.
 - Backups e painel operacional.
 
 Responsabilidades da Dogs API:
 
-- Autenticação da aplicação.
+- Validação do token Supabase recebido pelo frontend.
+- Sincronização do perfil local do tutor.
 - Regras de domínio.
 - Permissões de tutores em perfis de cachorro.
 - Upload orquestrado.
@@ -184,15 +186,15 @@ Regras:
 
 ### User
 
-Representa uma pessoa/tutor.
+Representa o perfil local de uma pessoa/tutor autenticada pelo Supabase Auth.
 
 Campos:
 
 - `id`
+- `supabaseAuthId`
 - `username`
 - `name`
 - `email`
-- `passwordHash`
 - `avatarUrl`
 - `bio`
 - `city`
@@ -202,9 +204,10 @@ Campos:
 
 Regras:
 
+- `supabaseAuthId` único.
 - `username` único.
 - `email` único.
-- senha nunca é salva em texto puro.
+- senha e provedores sociais são gerenciados pelo Supabase Auth, não pela Dogs API.
 - conta pode existir sem cachorro, mas o onboarding deve sugerir cadastro do primeiro pet.
 
 ### Dog
@@ -472,39 +475,24 @@ Regras:
 - eventos podem ser agregados depois em tabelas de estatísticas.
 - não bloquear fluxo principal se gravação de analytics falhar.
 
-### PasswordResetToken
+### Auth Supabase
 
-Campos:
+A Dogs API não salva senha, refresh token ou tokens de recuperação.
 
-- `id`
-- `userId`
-- `tokenHash`
-- `expiresAt`
-- `usedAt`
-- `createdAt`
+Responsabilidades do Supabase Auth:
 
-Regras:
+- credenciais por email e senha;
+- social login, incluindo Google, Apple e Azure (Microsoft);
+- recuperação de senha;
+- emissão e renovação de sessão;
+- armazenamento de identidades no schema interno `auth`.
 
-- token expira.
-- token usado não pode ser reutilizado.
-- token salvo somente como hash.
+Responsabilidades da Dogs API:
 
-### RefreshToken
-
-Campos:
-
-- `id`
-- `userId`
-- `tokenHash`
-- `expiresAt`
-- `revokedAt`
-- `createdAt`
-
-Regras:
-
-- salvar refresh token como hash.
-- permitir rotação de refresh token.
-- logout revoga token ativo.
+- validar access token Supabase;
+- extrair o `sub` do token como identificador do usuário Supabase;
+- associar esse identificador a `User.supabaseAuthId`;
+- aplicar permissões e regras de domínio.
 
 ## Endpoints REST
 
@@ -530,14 +518,14 @@ GET /docs-json
 ### Auth
 
 ```txt
-POST /v1/auth/register
-POST /v1/auth/login
-POST /v1/auth/refresh
-POST /v1/auth/logout
 GET  /v1/auth/me
-POST /v1/auth/password/lost
-POST /v1/auth/password/reset
+POST /v1/auth/sync
 ```
+
+Observação:
+
+- register, login, refresh, logout e password reset acontecem no frontend com Supabase Auth.
+- `POST /v1/auth/sync` cria ou atualiza o perfil local `User` após autenticação no Supabase.
 
 ### Users
 
@@ -731,10 +719,11 @@ Regras:
 
 Recomendação:
 
-- Access token JWT curto.
-- Refresh token opaco, salvo como hash no banco.
-- Senha com hash forte.
-- Rate limit em login, recuperação de senha e interesse de contato.
+- Supabase Auth emite e renova tokens.
+- Frontend autentica com Supabase Auth.
+- Dogs API valida `Authorization: Bearer <supabase_access_token>`.
+- Senhas e provedores sociais ficam fora da Dogs API.
+- Rate limit em endpoints sensíveis da Dogs API, como upload e interesse de contato.
 - CORS limitado aos domínios do frontend.
 - Helmet/security headers.
 - Validação de payload em todos os endpoints.
@@ -847,12 +836,9 @@ CORS_ORIGINS=http://localhost:5173
 DATABASE_URL=
 DIRECT_DATABASE_URL=
 
-JWT_ACCESS_SECRET=
-JWT_REFRESH_SECRET=
-ACCESS_TOKEN_TTL=15m
-REFRESH_TOKEN_TTL=30d
-
 SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_JWT_SECRET=
 SUPABASE_SERVICE_ROLE_KEY=
 SUPABASE_STORAGE_BUCKET=dogs-media
 
@@ -940,8 +926,8 @@ Camadas recomendadas:
 Cenários críticos:
 
 - criar usuário.
-- login.
-- refresh token.
+- validar token Supabase.
+- sincronizar perfil local.
 - criar cachorro.
 - convidar tutor.
 - aceitar convite.
@@ -949,7 +935,7 @@ Cenários críticos:
 - criar post como tutor ativo.
 - bloquear post de usuário sem membership.
 - filtrar feed por raça.
-- recuperar senha.
+- bloquear acesso com token inválido.
 
 ## Módulos NestJS Sugeridos
 
@@ -998,6 +984,8 @@ PasswordResetToken
 RefreshToken
 ```
 
+Observação: `PasswordResetToken` e `RefreshToken` pertenciam ao plano de JWT próprio. Com Supabase Auth, eles ficam fora do schema da Dogs API.
+
 ## Seed Inicial
 
 Seeds úteis:
@@ -1008,14 +996,9 @@ Seeds úteis:
 - posts demo.
 - membership do usuário demo como owner.
 
-Credencial demo sugerida para ambiente não produtivo:
+Usuário demo em ambiente não produtivo deve ser criado via Supabase Auth quando necessário.
 
-```txt
-usuario: demo
-senha: Demo1234
-```
-
-Em produção, usuário demo deve ser opcional e controlado por env.
+Em produção, usuário demo deve ser opcional, controlado por env e nunca conter credenciais reais versionadas.
 
 ## Integração Futura Com O Frontend
 
@@ -1037,14 +1020,14 @@ Ordem de implementação:
 1. Bootstrap do repositório `dogs-api`.
 2. Configuração de NestJS, Prisma, Supabase e Swagger.
 3. Health check.
-4. Auth com register/login/me/refresh/logout.
+4. Supabase Auth guard, sync de perfil e auth/me.
 5. Users/me.
 6. Breeds seed e listagem.
 7. Dogs com membership owner.
 8. Convite de tutor.
 9. Posts com upload de imagem.
 10. Feed público com filtros.
-11. Password reset.
+11. Fluxos de Auth no Supabase, se necessário.
 12. Favorites ou contact interest.
 13. Stats/analytics básico.
 14. Collection HTTP para Postman, Insomnia ou Bruno.
