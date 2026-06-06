@@ -149,7 +149,7 @@ docs/API_CONTRACT.md
 - `health`: status operacional.
 - `auth`: validação de token Supabase, sync de perfil local e usuário autenticado.
 - `users`: perfil de tutor.
-- `breeds`: catálogo de raças.
+- `breeds`: catálogo público de raças.
 - `dogs`: perfis de cachorro e memberships.
 - `posts`: publicações no feed.
 - `media`: upload e metadados de arquivos.
@@ -160,7 +160,7 @@ docs/API_CONTRACT.md
 ## Fora Do Scaffold Atual
 
 - Provedores OAuth ainda não foram configurados no painel do Supabase.
-- Endpoints de domínio como breeds, dogs, posts, media e favorites ainda não foram implementados.
+- Endpoints de domínio como dogs, posts, media e favorites ainda não foram implementados.
 
 ## Prisma
 

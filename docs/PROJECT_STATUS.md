@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Contrato de respostas e erros configurado.
+Auth/users e catálogo público de raças implementados.
 
 ## Já Definido
 
@@ -18,7 +18,7 @@ Contrato de respostas e erros configurado.
 
 ## Próximo Marco
 
-Concluir autenticação e usuários.
+Implementar cachorros e memberships.
 
 ## Concluído
 
@@ -34,6 +34,8 @@ Concluir autenticação e usuários.
 - `06-prisma-supabase`: Prisma schema inicial, Prisma Client, DatabaseModule, PrismaService e seed de raças.
 - `07-health-swagger`: `GET /health`, Swagger em `/docs` e OpenAPI JSON em `/docs-json`.
 - `08-error-response-contract`: helpers de resposta, códigos de erro estáveis, `AppException` e filtro global de exceções.
+- `09-auth-users`: Supabase Auth guard, usuário atual, sync de perfil local e endpoints `auth/me`, `auth/sync`, `users/me`.
+- `10-breeds-seed`: seed idempotente de raças e endpoints `GET /v1/breeds` e `GET /v1/breeds/:slug`.
 
 ## Pendências Relevantes
 

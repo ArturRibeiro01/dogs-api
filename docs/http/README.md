@@ -38,6 +38,15 @@ Nunca versione tokens reais, senhas ou service role key na collection.
 3. O after-response script salva `access_token` automaticamente no ambiente selecionado.
 4. Rode `Dogs API - Auth -> GET /v1/auth/me` ou `Users -> GET /v1/users/me`.
 
+## Raças
+
+Requests públicos:
+
+```txt
+GET /v1/breeds
+GET /v1/breeds/golden-retriever
+```
+
 Se a collection já tinha sido importada antes deste script existir, abra o request `POST password login`,
 vá em `Scripts -> After-response` e cole:
 
