@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Auth/users e catálogo público de raças implementados.
+Dogs e memberships iniciais implementados.
 
 ## Já Definido
 
@@ -18,7 +18,7 @@ Auth/users e catálogo público de raças implementados.
 
 ## Próximo Marco
 
-Implementar cachorros e memberships.
+Implementar posts, media e feed inicial.
 
 ## Concluído
 
@@ -36,6 +36,7 @@ Implementar cachorros e memberships.
 - `08-error-response-contract`: helpers de resposta, códigos de erro estáveis, `AppException` e filtro global de exceções.
 - `09-auth-users`: Supabase Auth guard, usuário atual, sync de perfil local e endpoints `auth/me`, `auth/sync`, `users/me`.
 - `10-breeds-seed`: seed idempotente de raças e endpoints `GET /v1/breeds` e `GET /v1/breeds/:slug`.
+- `11-dogs-memberships`: CRUD inicial de cachorros, owner membership na criação, permissões de edição/remoção e listagem de membros.
 
 ## Pendências Relevantes
 
