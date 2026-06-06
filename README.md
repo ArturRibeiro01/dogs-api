@@ -72,6 +72,7 @@ GET    /v1/dogs/:dogId/members
 POST   /v1/posts
 PATCH  /v1/posts/:postId
 DELETE /v1/posts/:postId
+POST   /v1/media
 ```
 
 Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:

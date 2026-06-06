@@ -152,7 +152,7 @@ docs/API_CONTRACT.md
 - `breeds`: catálogo público de raças.
 - `dogs`: perfis de cachorro, listagem pública e memberships iniciais.
 - `posts`: publicações, feed público e soft delete.
-- `media`: upload e metadados de arquivos.
+- `media`: upload multipart, Supabase Storage e metadados de arquivos.
 - `favorites`: cachorros favoritados.
 - `contact-interests`: interesse de contato.
 - `analytics`: eventos e estatísticas.
@@ -160,7 +160,7 @@ docs/API_CONTRACT.md
 ## Fora Do Scaffold Atual
 
 - Provedores OAuth ainda não foram configurados no painel do Supabase.
-- Upload de media, favorites e contact interests ainda não foram implementados.
+- Favorites e contact interests ainda não foram implementados.
 
 ## Prisma
 

@@ -187,6 +187,18 @@
       "metaSortKey": 700
     },
     {
+      "_id": "fld_media",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Media",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 800
+    },
+    {
       "_id": "req_health",
       "_type": "request",
       "parentId": "fld_infra",
@@ -771,6 +783,47 @@
       ],
       "authentication": {},
       "metaSortKey": 500
+    },
+    {
+      "_id": "req_media_upload",
+      "_type": "request",
+      "parentId": "fld_media",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/media",
+      "name": "POST /v1/media",
+      "description": "Upload multipart de imagem para post.",
+      "method": "POST",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "name": "postId",
+            "value": "{{ _.post_id }}",
+            "type": "text",
+            "disabled": false
+          },
+          {
+            "name": "file",
+            "value": "",
+            "type": "file",
+            "disabled": false
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
     }
   ]
 }
