@@ -42,6 +42,21 @@ GET /docs
 GET /docs-json
 ```
 
+Endpoints iniciais autenticados:
+
+```txt
+GET   /v1/auth/me
+POST  /v1/auth/sync
+GET   /v1/users/me
+PATCH /v1/users/me
+```
+
+Esses endpoints usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
+
+```txt
+Authorization: Bearer <supabase_access_token>
+```
+
 ## Scripts
 
 ```sh
@@ -64,3 +79,4 @@ yarn start
 - `docs/PRISMA_GUIDE.md`
 - `docs/API_CONTRACT.md`
 - `docs/AUTH_STRATEGY.md`
+- `docs/http/README.md`

@@ -159,7 +159,8 @@ docs/API_CONTRACT.md
 
 ## Fora Do Scaffold Atual
 
-- Autenticação ainda não foi implementada.
+- Provedores OAuth ainda não foram configurados no painel do Supabase.
+- Endpoints de domínio como breeds, dogs, posts, media e favorites ainda não foram implementados.
 
 ## Prisma
 
@@ -181,7 +182,7 @@ O seed inicial está em:
 prisma/seed.ts
 ```
 
-O `DatabaseModule` existe, mas ainda não é importado pelo `AppModule` para evitar conexão obrigatória com banco antes dos endpoints de domínio existirem.
+O `DatabaseModule` é usado pelos módulos que precisam do Prisma. O `PrismaService` não chama `$connect()` no bootstrap; o Prisma abre conexão de forma lazy quando uma query real é executada.
 
 ## Autenticação
 
@@ -191,7 +192,7 @@ Detalhes da decisão:
 docs/AUTH_STRATEGY.md
 ```
 
-Fluxo planejado:
+Fluxo:
 
 ```txt
 Frontend -> Supabase Auth -> access token

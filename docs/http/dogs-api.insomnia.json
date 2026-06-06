@@ -1,0 +1,341 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-06-06T01:30:00.000Z",
+  "__export_source": "dogs-api",
+  "resources": [
+    {
+      "_id": "wrk_dogs_api",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs API",
+      "description": "Collection de desenvolvimento da Dogs API.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_dogs_api_base",
+      "_type": "environment",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3333",
+        "supabase_url": "https://replace-me.supabase.co",
+        "supabase_anon_key": "replace-me",
+        "auth_email": "test@dogs.dev",
+        "auth_password": "replace-me",
+        "access_token": "replace-me"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "supabase_url",
+          "supabase_anon_key",
+          "auth_email",
+          "auth_password",
+          "access_token"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1780709400000
+    },
+    {
+      "_id": "env_dogs_api_local",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:3333"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#2563eb",
+      "isPrivate": false,
+      "metaSortKey": 1780709400001
+    },
+    {
+      "_id": "env_dogs_api_dev",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dev",
+      "data": {
+        "base_url": "https://dev-api.example.com"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#16a34a",
+      "isPrivate": false,
+      "metaSortKey": 1780709400002
+    },
+    {
+      "_id": "env_dogs_api_prod",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Prod",
+      "data": {
+        "base_url": "https://api.example.com"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#dc2626",
+      "isPrivate": false,
+      "metaSortKey": 1780709400003
+    },
+    {
+      "_id": "fld_infra",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Infra",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100
+    },
+    {
+      "_id": "fld_supabase_auth",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Supabase Auth",
+      "description": "Requests diretos no Supabase Auth para obter token de teste.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200
+    },
+    {
+      "_id": "fld_dogs_auth",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs API - Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 300
+    },
+    {
+      "_id": "fld_users",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 400
+    },
+    {
+      "_id": "req_health",
+      "_type": "request",
+      "parentId": "fld_infra",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/health",
+      "name": "GET /health",
+      "description": "Health check da Dogs API.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "scripts": {
+        "afterResponse": "insomnia.test('Supabase login returned access token', () => {\n  insomnia.expect(insomnia.response.code).to.eql(200);\n\n  const jsonBody = insomnia.response.json();\n  insomnia.expect(jsonBody.access_token).to.be.a('string');\n\n  insomnia.environment.set('access_token', jsonBody.access_token);\n\n  if (jsonBody.refresh_token) {\n    insomnia.environment.set('refresh_token', jsonBody.refresh_token);\n  }\n});"
+      },
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_openapi_json",
+      "_type": "request",
+      "parentId": "fld_infra",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/docs-json",
+      "name": "GET /docs-json",
+      "description": "OpenAPI JSON gerado pelo Swagger.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_supabase_login",
+      "_type": "request",
+      "parentId": "fld_supabase_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.supabase_url }}/auth/v1/token?grant_type=password",
+      "name": "POST password login",
+      "description": "Obtém access_token no Supabase Auth. Copie response.access_token para a variável access_token do ambiente.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.auth_email }}\",\n  \"password\": \"{{ _.auth_password }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "apikey",
+          "value": "{{ _.supabase_anon_key }}"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.supabase_anon_key }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_auth_me",
+      "_type": "request",
+      "parentId": "fld_dogs_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/auth/me",
+      "name": "GET /v1/auth/me",
+      "description": "Retorna/cria o perfil local do usuário autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_auth_sync",
+      "_type": "request",
+      "parentId": "fld_dogs_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/auth/sync",
+      "name": "POST /v1/auth/sync",
+      "description": "Sincroniza dados opcionais do perfil local.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"artur\",\n  \"name\": \"Artur Ribeiro\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_users_me",
+      "_type": "request",
+      "parentId": "fld_users",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/users/me",
+      "name": "GET /v1/users/me",
+      "description": "Retorna/cria o perfil local do tutor autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_users_patch_me",
+      "_type": "request",
+      "parentId": "fld_users",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/users/me",
+      "name": "PATCH /v1/users/me",
+      "description": "Atualiza campos editáveis do perfil local.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"artur_dev\",\n  \"name\": \"Artur Ribeiro\",\n  \"bio\": \"Tutor no Dogs.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    }
+  ]
+}

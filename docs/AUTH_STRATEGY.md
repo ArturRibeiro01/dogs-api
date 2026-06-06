@@ -68,7 +68,7 @@ Esse campo referencia conceitualmente o `id` do usuário no Supabase Auth.
 - Password reset próprio.
 - Implementação própria de OAuth.
 
-## Endpoints Planejados Na Dogs API
+## Endpoints Implementados Na Dogs API
 
 ```txt
 GET  /v1/auth/me
@@ -76,6 +76,15 @@ POST /v1/auth/sync
 GET  /v1/users/me
 PATCH /v1/users/me
 ```
+
+Todos esses endpoints esperam:
+
+```txt
+Authorization: Bearer <supabase_access_token>
+```
+
+Na estratégia inicial, a Dogs API valida o token com o client oficial do Supabase usando `auth.getUser(token)`.
+Isso exige `SUPABASE_URL` e `SUPABASE_ANON_KEY` configurados no ambiente da API.
 
 ## Endpoints Que Ficam No Supabase Auth
 
@@ -98,4 +107,4 @@ PATCH /v1/users/me
 - Criar o projeto `dogs-dev` no Supabase.
 - Configurar redirect URLs locais, dev e prod.
 - Definir se confirmação de email será obrigatória.
-- Definir se a Dogs API validará token por `SUPABASE_JWT_SECRET`, JWKS ou Admin API.
+- Avaliar futuramente se vale trocar a validação via `auth.getUser(token)` por validação local via JWKS/JWT.

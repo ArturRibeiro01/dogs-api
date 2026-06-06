@@ -31,8 +31,7 @@ Este arquivo concentra decisões que precisam ser tomadas antes ou durante o sca
 
 - Definir se Swagger em produção será público ou protegido por basic auth.
 - Definir rate limits iniciais para uploads e contact interests.
-- Confirmar estratégia de validação de token Supabase na Dogs API.
-- Confirmar se usaremos `SUPABASE_JWT_SECRET` localmente ou validação via Supabase Admin API/JWKS.
+- Avaliar futuramente se a validação de token Supabase deve continuar via `auth.getUser(token)` ou migrar para validação local via JWKS/JWT.
 - Definir política de CORS por ambiente.
 
 ## Email
