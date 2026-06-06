@@ -143,6 +143,18 @@
       "metaSortKey": 400
     },
     {
+      "_id": "fld_breeds",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Breeds",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 500
+    },
+    {
       "_id": "req_health",
       "_type": "request",
       "parentId": "fld_infra",
@@ -161,9 +173,6 @@
         }
       ],
       "authentication": {},
-      "scripts": {
-        "afterResponse": "insomnia.test('Supabase login returned access token', () => {\n  insomnia.expect(insomnia.response.code).to.eql(200);\n\n  const jsonBody = insomnia.response.json();\n  insomnia.expect(jsonBody.access_token).to.be.a('string');\n\n  insomnia.environment.set('access_token', jsonBody.access_token);\n\n  if (jsonBody.refresh_token) {\n    insomnia.environment.set('refresh_token', jsonBody.refresh_token);\n  }\n});"
-      },
       "metaSortKey": 100
     },
     {
@@ -221,6 +230,9 @@
         }
       ],
       "authentication": {},
+      "scripts": {
+        "afterResponse": "insomnia.test('Supabase login returned access token', () => {\n  insomnia.expect(insomnia.response.code).to.eql(200);\n\n  const jsonBody = insomnia.response.json();\n  insomnia.expect(jsonBody.access_token).to.be.a('string');\n\n  insomnia.environment.set('access_token', jsonBody.access_token);\n\n  if (jsonBody.refresh_token) {\n    insomnia.environment.set('refresh_token', jsonBody.refresh_token);\n  }\n});"
+      },
       "metaSortKey": 100
     },
     {
@@ -332,6 +344,48 @@
         {
           "name": "Authorization",
           "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_breeds_list",
+      "_type": "request",
+      "parentId": "fld_breeds",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/breeds",
+      "name": "GET /v1/breeds",
+      "description": "Lista raças ordenadas por nome.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_breeds_find_by_slug",
+      "_type": "request",
+      "parentId": "fld_breeds",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/breeds/golden-retriever",
+      "name": "GET /v1/breeds/:slug",
+      "description": "Busca uma raça pelo slug.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
         }
       ],
       "authentication": {},

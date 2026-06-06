@@ -51,7 +51,14 @@ GET   /v1/users/me
 PATCH /v1/users/me
 ```
 
-Esses endpoints usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
+Endpoints públicos de domínio:
+
+```txt
+GET /v1/breeds
+GET /v1/breeds/:slug
+```
+
+Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
 
 ```txt
 Authorization: Bearer <supabase_access_token>
