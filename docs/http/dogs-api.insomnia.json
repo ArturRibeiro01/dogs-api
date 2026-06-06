@@ -30,7 +30,8 @@
         "access_token": "replace-me",
         "breed_id": "replace-me",
         "dog_id": "replace-me",
-        "dog_slug": "luke"
+        "dog_slug": "luke",
+        "post_id": "replace-me"
       },
       "dataPropertyOrder": {
         "&": [
@@ -42,7 +43,8 @@
           "access_token",
           "breed_id",
           "dog_id",
-          "dog_slug"
+          "dog_slug",
+          "post_id"
         ]
       },
       "color": null,
@@ -171,6 +173,18 @@
       "environment": {},
       "environmentPropertyOrder": null,
       "metaSortKey": 600
+    },
+    {
+      "_id": "fld_posts",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Posts",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 700
     },
     {
       "_id": "req_health",
@@ -595,6 +609,168 @@
       ],
       "authentication": {},
       "metaSortKey": 600
+    },
+    {
+      "_id": "req_posts_create",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts",
+      "name": "POST /v1/posts",
+      "description": "Cria post para cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"dogId\": \"{{ _.dog_id }}\",\n  \"caption\": \"Primeiro passeio no parque.\",\n  \"visibility\": \"public\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_posts_list",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts",
+      "name": "GET /v1/posts",
+      "description": "Lista feed público com filtros opcionais.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "perPage",
+          "value": "12",
+          "disabled": false
+        },
+        {
+          "name": "dog",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "breed",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "city",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "state",
+          "value": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_posts_find_by_id",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "GET /v1/posts/:postId",
+      "description": "Busca post público pelo id.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300
+    },
+    {
+      "_id": "req_posts_update",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "PATCH /v1/posts/:postId",
+      "description": "Atualiza post quando o usuário autenticado pode gerenciar o cachorro.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"caption\": \"Legenda atualizada.\",\n  \"visibility\": \"public\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 400
+    },
+    {
+      "_id": "req_posts_delete",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "DELETE /v1/posts/:postId",
+      "description": "Remove post com soft delete.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 500
     }
   ]
 }

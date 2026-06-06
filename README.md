@@ -58,6 +58,8 @@ GET /v1/breeds
 GET /v1/breeds/:slug
 GET /v1/dogs
 GET /v1/dogs/:slug
+GET /v1/posts
+GET /v1/posts/:postId
 ```
 
 Endpoints autenticados de domínio:
@@ -67,6 +69,9 @@ POST   /v1/dogs
 PATCH  /v1/dogs/:dogId
 DELETE /v1/dogs/:dogId
 GET    /v1/dogs/:dogId/members
+POST   /v1/posts
+PATCH  /v1/posts/:postId
+DELETE /v1/posts/:postId
 ```
 
 Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
