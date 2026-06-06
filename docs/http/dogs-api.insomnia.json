@@ -27,7 +27,10 @@
         "supabase_anon_key": "replace-me",
         "auth_email": "test@dogs.dev",
         "auth_password": "replace-me",
-        "access_token": "replace-me"
+        "access_token": "replace-me",
+        "breed_id": "replace-me",
+        "dog_id": "replace-me",
+        "dog_slug": "luke"
       },
       "dataPropertyOrder": {
         "&": [
@@ -36,7 +39,10 @@
           "supabase_anon_key",
           "auth_email",
           "auth_password",
-          "access_token"
+          "access_token",
+          "breed_id",
+          "dog_id",
+          "dog_slug"
         ]
       },
       "color": null,
@@ -153,6 +159,18 @@
       "environment": {},
       "environmentPropertyOrder": null,
       "metaSortKey": 500
+    },
+    {
+      "_id": "fld_dogs",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 600
     },
     {
       "_id": "req_health",
@@ -390,6 +408,193 @@
       ],
       "authentication": {},
       "metaSortKey": 200
+    },
+    {
+      "_id": "req_dogs_create",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs",
+      "name": "POST /v1/dogs",
+      "description": "Cria cachorro e membership owner para o usuário autenticado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Luke\",\n  \"breedId\": \"{{ _.breed_id }}\",\n  \"sex\": \"male\",\n  \"size\": \"medium\",\n  \"weight\": 12.5,\n  \"bio\": \"Ama parques e caminhadas.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\",\n  \"interests\": [\"walks\", \"friendship\"],\n  \"isPublic\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_dogs_list",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs",
+      "name": "GET /v1/dogs",
+      "description": "Lista cachorros públicos com filtros opcionais.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "perPage",
+          "value": "12",
+          "disabled": false
+        },
+        {
+          "name": "breed",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "city",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "state",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "interest",
+          "value": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_dogs_find_by_slug",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_slug }}",
+      "name": "GET /v1/dogs/:slug",
+      "description": "Busca cachorro público pelo slug.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300
+    },
+    {
+      "_id": "req_dogs_update",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}",
+      "name": "PATCH /v1/dogs/:dogId",
+      "description": "Atualiza cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"bio\": \"Perfil atualizado pela Dogs API.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\",\n  \"interests\": [\"walks\", \"community\"],\n  \"isPublic\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 400
+    },
+    {
+      "_id": "req_dogs_members",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}/members",
+      "name": "GET /v1/dogs/:dogId/members",
+      "description": "Lista membros ativos do cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 500
+    },
+    {
+      "_id": "req_dogs_delete",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}",
+      "name": "DELETE /v1/dogs/:dogId",
+      "description": "Remove cachorro quando o usuário autenticado é owner.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 600
     }
   ]
 }

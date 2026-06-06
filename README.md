@@ -56,6 +56,17 @@ Endpoints públicos de domínio:
 ```txt
 GET /v1/breeds
 GET /v1/breeds/:slug
+GET /v1/dogs
+GET /v1/dogs/:slug
+```
+
+Endpoints autenticados de domínio:
+
+```txt
+POST   /v1/dogs
+PATCH  /v1/dogs/:dogId
+DELETE /v1/dogs/:dogId
+GET    /v1/dogs/:dogId/members
 ```
 
 Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:

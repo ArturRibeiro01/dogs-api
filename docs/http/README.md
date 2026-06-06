@@ -47,6 +47,27 @@ GET /v1/breeds
 GET /v1/breeds/golden-retriever
 ```
 
+## Cachorros
+
+Antes de criar cachorro, copie o `id` de uma raça retornada por `GET /v1/breeds` e preencha a variável:
+
+```txt
+breed_id=id-da-raca
+```
+
+Requests principais:
+
+```txt
+POST   /v1/dogs
+GET    /v1/dogs
+GET    /v1/dogs/:slug
+PATCH  /v1/dogs/:dogId
+GET    /v1/dogs/:dogId/members
+DELETE /v1/dogs/:dogId
+```
+
+Depois de criar um cachorro, copie `data.id` para `dog_id` e `data.slug` para `dog_slug`.
+
 Se a collection já tinha sido importada antes deste script existir, abra o request `POST password login`,
 vá em `Scripts -> After-response` e cole:
 
