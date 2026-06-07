@@ -2,6 +2,12 @@
 
 Collection inicial para testar a Dogs API no Insomnia.
 
+Ferramenta escolhida para o projeto:
+
+```txt
+Insomnia
+```
+
 ## Arquivo
 
 ```txt
@@ -27,6 +33,10 @@ supabase_anon_key=sb_publishable_...
 auth_email=email-do-usuario-de-teste
 auth_password=senha-do-usuario-de-teste
 access_token=preencher depois do login
+breed_id=preencher depois de listar raças
+dog_id=preencher depois de criar cachorro
+dog_slug=preencher depois de criar cachorro
+post_id=preencher depois de criar post
 ```
 
 Nunca versione tokens reais, senhas ou service role key na collection.
@@ -124,3 +134,24 @@ A collection já vem com:
 - `Prod`: placeholder para produção.
 
 Atualize `base_url` de `Dev` e `Prod` quando esses ambientes existirem.
+
+## Segurança
+
+- A collection versionada usa placeholders.
+- Não versionar `auth_password`, tokens reais, service role key ou connection strings.
+- Se um token real for colado em chat, issue, commit ou print público, gere uma nova sessão.
+
+## Atualizando A Collection
+
+Quando novos endpoints forem implementados:
+
+1. Adicione o request em `docs/http/dogs-api.insomnia.json`.
+2. Use variáveis em vez de valores reais.
+3. Rode:
+
+```sh
+node -e "JSON.parse(require('fs').readFileSync('docs/http/dogs-api.insomnia.json','utf8')); console.log('valid json')"
+yarn prettier --check docs/http/dogs-api.insomnia.json docs/http/README.md
+```
+
+4. Reimporte o arquivo no Insomnia se necessário.

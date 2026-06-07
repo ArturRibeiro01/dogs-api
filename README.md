@@ -103,4 +103,5 @@ yarn start
 - `docs/PRISMA_GUIDE.md`
 - `docs/API_CONTRACT.md`
 - `docs/AUTH_STRATEGY.md`
+- `docs/FRONTEND_INTEGRATION_HANDOFF.md`
 - `docs/http/README.md`
