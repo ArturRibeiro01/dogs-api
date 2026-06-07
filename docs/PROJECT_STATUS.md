@@ -4,7 +4,7 @@ Status inicial do backend `dogs-api`.
 
 ## Fase Atual
 
-Dogs e memberships iniciais implementados.
+Posts, feed público e upload de media implementados.
 
 ## Já Definido
 
@@ -18,7 +18,7 @@ Dogs e memberships iniciais implementados.
 
 ## Próximo Marco
 
-Implementar posts, media e feed inicial.
+Implementar favoritos e interações de contato.
 
 ## Concluído
 
@@ -37,6 +37,7 @@ Implementar posts, media e feed inicial.
 - `09-auth-users`: Supabase Auth guard, usuário atual, sync de perfil local e endpoints `auth/me`, `auth/sync`, `users/me`.
 - `10-breeds-seed`: seed idempotente de raças e endpoints `GET /v1/breeds` e `GET /v1/breeds/:slug`.
 - `11-dogs-memberships`: CRUD inicial de cachorros, owner membership na criação, permissões de edição/remoção e listagem de membros.
+- `12-posts-media-feed`: posts, feed público, filtros, permissões por membership, soft delete e upload multipart para Supabase Storage.
 
 ## Pendências Relevantes
 

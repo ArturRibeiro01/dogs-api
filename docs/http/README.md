@@ -68,6 +68,35 @@ DELETE /v1/dogs/:dogId
 
 Depois de criar um cachorro, copie `data.id` para `dog_id` e `data.slug` para `dog_slug`.
 
+## Posts
+
+Requests principais:
+
+```txt
+POST   /v1/posts
+GET    /v1/posts
+GET    /v1/posts/:postId
+PATCH  /v1/posts/:postId
+DELETE /v1/posts/:postId
+```
+
+Depois de criar um post, copie `data.id` para `post_id`.
+
+## Media
+
+Request multipart:
+
+```txt
+POST /v1/media
+```
+
+Campos:
+
+```txt
+postId=id-do-post
+file=imagem jpeg, png ou webp ate 5 MB
+```
+
 Se a collection já tinha sido importada antes deste script existir, abra o request `POST password login`,
 vá em `Scripts -> After-response` e cole:
 
