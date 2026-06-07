@@ -18,7 +18,7 @@ Posts, feed público e upload de media implementados.
 
 ## Próximo Marco
 
-Implementar favoritos e interações de contato.
+Integrar frontend `react-dogs` com a Dogs API.
 
 ## Concluído
 
@@ -38,6 +38,7 @@ Implementar favoritos e interações de contato.
 - `10-breeds-seed`: seed idempotente de raças e endpoints `GET /v1/breeds` e `GET /v1/breeds/:slug`.
 - `11-dogs-memberships`: CRUD inicial de cachorros, owner membership na criação, permissões de edição/remoção e listagem de membros.
 - `12-posts-media-feed`: posts, feed público, filtros, permissões por membership, soft delete e upload multipart para Supabase Storage.
+- `13-http-collection`: collection Insomnia segura, variáveis por ambiente e handoff de integração para o frontend.
 
 ## Pendências Relevantes
 
