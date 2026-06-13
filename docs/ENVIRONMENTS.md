@@ -20,6 +20,8 @@ develop   -> API dev
 main      -> API prod
 ```
 
+No Render, o serviço dev acompanha `develop` com auto deploy após o CI passar. O serviço prod acompanhará `main` quando o Supabase `dogs-prod` existir.
+
 Se `hml` entrar futuramente:
 
 ```txt
