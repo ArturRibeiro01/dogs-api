@@ -1,5 +1,34 @@
 # API Contract
 
+## Documentação Interativa
+
+O Swagger apresenta todos os endpoints, parâmetros, schemas e respostas disponíveis em cada ambiente.
+
+| Ambiente        | Swagger                                                                    | OpenAPI JSON                                                                         | Health check                                                                   |
+| --------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Local           | [localhost:3333/docs](http://localhost:3333/docs)                          | [localhost:3333/docs-json](http://localhost:3333/docs-json)                          | [localhost:3333/health](http://localhost:3333/health)                          |
+| Desenvolvimento | [dogs-api-dev.onrender.com/docs](https://dogs-api-dev.onrender.com/docs)   | [dogs-api-dev.onrender.com/docs-json](https://dogs-api-dev.onrender.com/docs-json)   | [dogs-api-dev.onrender.com/health](https://dogs-api-dev.onrender.com/health)   |
+| Produção        | [dogs-api-prod.onrender.com/docs](https://dogs-api-prod.onrender.com/docs) | [dogs-api-prod.onrender.com/docs-json](https://dogs-api-prod.onrender.com/docs-json) | [dogs-api-prod.onrender.com/health](https://dogs-api-prod.onrender.com/health) |
+
+### Testar Uma Rota Pública
+
+1. Abra o Swagger do ambiente desejado.
+2. Selecione um endpoint que não exija autenticação, como `GET /v1/breeds`.
+3. Clique em **Try it out**.
+4. Preencha os parâmetros opcionais e clique em **Execute**.
+
+### Testar Uma Rota Autenticada
+
+As rotas protegidas esperam um access token emitido pelo Supabase Auth:
+
+```http
+Authorization: Bearer <supabase_access_token>
+```
+
+No Swagger, clique em **Authorize** e informe o token no formato indicado. Tokens e credenciais nunca devem ser adicionados a exemplos, documentação, issues ou commits.
+
+> No plano gratuito do Render, o primeiro acesso pode demorar enquanto o serviço é iniciado.
+
 Este documento registra o contrato base de respostas da `dogs-api`.
 
 ## Resposta De Item

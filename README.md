@@ -1,106 +1,128 @@
 # Dogs API
 
-Backend próprio do Dogs, criado para substituir gradualmente a API pública usada pelo frontend `react-dogs`.
+API oficial do projeto Dogs, responsável por autenticação integrada ao Supabase, perfis, cachorros, raças, publicações e arquivos de mídia.
 
-## Stack Inicial
+[![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?logo=nestjs&logoColor=white)](https://nestjs.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Auth-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![Render](https://img.shields.io/badge/Render-Deploy-000000?logo=render&logoColor=white)](https://render.com/)
 
-- Node.js
-- TypeScript
-- NestJS
-- Yarn
+## Acesse O Projeto
 
-## Requisitos
+| Ambiente        | Para que serve                          | API                                                        | Swagger                                                       | Frontend                                                            |
+| --------------- | --------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Desenvolvimento | Testes e validação das próximas versões | [dogs-api-dev](https://dogs-api-dev.onrender.com/health)   | [Abrir documentação](https://dogs-api-dev.onrender.com/docs)  | [Abrir aplicação](https://arturribeiro01.github.io/react-dogs/dev/) |
+| Produção        | Versão estável disponível ao público    | [dogs-api-prod](https://dogs-api-prod.onrender.com/health) | [Abrir documentação](https://dogs-api-prod.onrender.com/docs) | [Abrir aplicação](https://arturribeiro01.github.io/react-dogs/)     |
 
-- Node.js 18+
-- Yarn 1.x
+> Os serviços usam o plano gratuito do Render. O primeiro acesso após um período sem uso pode levar alguns segundos enquanto a API é iniciada.
 
-## Setup Local
+## Entenda Os Ambientes
 
-Instale as dependências:
+O projeto mantém dados e serviços separados para que testes não alterem informações reais:
+
+```txt
+feature/* -> develop -> Dogs DEV  -> Supabase dogs-dev
+develop   -> main    -> Dogs PROD -> Supabase dogs-prod
+```
+
+- **DEV** recebe as alterações da branch `develop` e é usado para testar novas funcionalidades.
+- **PROD** recebe somente alterações promovidas para a branch `main` e representa a versão estável.
+- Cada ambiente possui sua própria API, banco de dados, autenticação e armazenamento de imagens.
+
+## O Que A API Oferece
+
+- autenticação de usuários com Supabase Auth;
+- sincronização e edição de perfis;
+- catálogo de raças;
+- cadastro e gerenciamento de cachorros;
+- feed público e gerenciamento de publicações;
+- upload de imagens no Supabase Storage;
+- documentação interativa com Swagger;
+- migrations e acesso ao PostgreSQL com Prisma.
+
+## Como Usar O Swagger
+
+O Swagger permite conhecer e testar os endpoints diretamente pelo navegador, sem instalar ferramentas adicionais.
+
+1. Abra o [Swagger de desenvolvimento](https://dogs-api-dev.onrender.com/docs) ou o [Swagger de produção](https://dogs-api-prod.onrender.com/docs).
+2. Expanda um endpoint para visualizar parâmetros, exemplos e respostas possíveis.
+3. Para rotas públicas, clique em **Try it out** e depois em **Execute**.
+4. Para rotas protegidas, autentique-se no frontend, obtenha um token válido e use o botão **Authorize** com `Bearer <token>`.
+
+O contrato completo e os formatos de resposta estão em [docs/API_CONTRACT.md](docs/API_CONTRACT.md).
+
+## Execução Local
+
+### Requisitos
+
+- Node.js 20;
+- Yarn 1.x;
+- acesso a um projeto Supabase configurado.
+
+### Instalação
 
 ```sh
 yarn install
 ```
 
-Suba a API em modo desenvolvimento:
+Crie o arquivo `.env.local` a partir do `.env.example` e informe as credenciais do ambiente de desenvolvimento. Nunca versione esse arquivo.
+
+Inicie a API:
 
 ```sh
 yarn dev
 ```
 
-Por padrão a aplicação sobe em:
+Serviços locais:
 
-```txt
-http://localhost:3333
-```
+| Recurso      | Endereço                        |
+| ------------ | ------------------------------- |
+| API          | http://localhost:3333           |
+| Health check | http://localhost:3333/health    |
+| Swagger      | http://localhost:3333/docs      |
+| OpenAPI JSON | http://localhost:3333/docs-json |
 
-Endpoints de infraestrutura:
+## Autenticação
 
-```txt
-GET /health
-GET /docs
-GET /docs-json
-```
+O frontend autentica o usuário no Supabase e envia o access token para a Dogs API:
 
-Endpoints iniciais autenticados:
-
-```txt
-GET   /v1/auth/me
-POST  /v1/auth/sync
-GET   /v1/users/me
-PATCH /v1/users/me
-```
-
-Endpoints públicos de domínio:
-
-```txt
-GET /v1/breeds
-GET /v1/breeds/:slug
-GET /v1/dogs
-GET /v1/dogs/:slug
-GET /v1/posts
-GET /v1/posts/:postId
-```
-
-Endpoints autenticados de domínio:
-
-```txt
-POST   /v1/dogs
-PATCH  /v1/dogs/:dogId
-DELETE /v1/dogs/:dogId
-GET    /v1/dogs/:dogId/members
-POST   /v1/posts
-PATCH  /v1/posts/:postId
-DELETE /v1/posts/:postId
-POST   /v1/media
-```
-
-Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
-
-```txt
+```http
 Authorization: Bearer <supabase_access_token>
 ```
 
+Rotas públicas podem ser consultadas sem token. Operações de perfil, publicação, upload e gerenciamento de cachorros exigem autenticação.
+
 ## Scripts
 
-```sh
-yarn dev
-yarn build
-yarn start
-```
+| Comando                      | Finalidade                                       |
+| ---------------------------- | ------------------------------------------------ |
+| `yarn dev`                   | Inicia a API local com recarregamento automático |
+| `yarn test`                  | Executa os testes automatizados                  |
+| `yarn validate`              | Executa lint, formatação, tipos, testes e build  |
+| `yarn build`                 | Compila a aplicação                              |
+| `yarn start`                 | Inicia a aplicação compilada                     |
+| `yarn prisma:migrate:deploy` | Aplica migrations versionadas                    |
+| `yarn prisma:seed`           | Cadastra os dados iniciais idempotentes          |
 
-## Documentação
+## Documentação Técnica
 
-- `docs/DOGS_API_SPEC.md`
-- `docs/BACKEND_API_PLAN.md`
-- `docs/CODEX_BACKEND_HANDOFF.md`
-- `docs/INITIAL_SCAFFOLD_PLAN.md`
-- `docs/DEVELOPMENT.md`
-- `docs/ARCHITECTURE.md`
-- `docs/ENVIRONMENTS.md`
-- `docs/SECURITY.md`
-- `docs/DEPLOYMENT.md`
-- `docs/PRISMA_GUIDE.md`
-- `docs/API_CONTRACT.md`
-- `docs/AUTH_STRATEGY.md`
-- `docs/http/README.md`
+| Documento                                           | Conteúdo                                      |
+| --------------------------------------------------- | --------------------------------------------- |
+| [Contrato da API](docs/API_CONTRACT.md)             | Swagger, autenticação e padrões de resposta   |
+| [Arquitetura](docs/ARCHITECTURE.md)                 | Organização e decisões da aplicação           |
+| [Ambientes](docs/ENVIRONMENTS.md)                   | Variáveis e separação entre local, dev e prod |
+| [Deployment](docs/DEPLOYMENT.md)                    | Render, branches e processo de publicação     |
+| [Segurança](docs/SECURITY.md)                       | Cuidados com credenciais e acesso             |
+| [Desenvolvimento](docs/DEVELOPMENT.md)              | Fluxo de trabalho local                       |
+| [Guia do Prisma](docs/PRISMA_GUIDE.md)              | Banco, migrations e seed                      |
+| [Estratégia de autenticação](docs/AUTH_STRATEGY.md) | Integração com Supabase Auth                  |
+| [Coleção HTTP](docs/http/README.md)                 | Requisições para testes manuais               |
+
+## Tecnologias
+
+Node.js, TypeScript, NestJS, Prisma, PostgreSQL, Supabase Auth, Supabase Storage, Swagger, Jest e Render.
+
+## Repositórios
+
+- Backend: [ArturRibeiro01/dogs-api](https://github.com/ArturRibeiro01/dogs-api)
+- Frontend: [ArturRibeiro01/react-dogs](https://github.com/ArturRibeiro01/react-dogs)
