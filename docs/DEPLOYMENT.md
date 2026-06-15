@@ -12,7 +12,13 @@ O deploy dev está definido em `render.yaml` para o Render:
 - health check em `/health`;
 - Swagger em `/docs` e `/docs-json`.
 
-O serviço de produção será adicionado quando o Supabase `dogs-prod` estiver criado.
+O deploy de produção também está definido em `render.yaml`:
+
+- serviço `dogs-api-prod`;
+- branch `main`;
+- auto deploy após os checks do GitHub passarem;
+- health check em `/health`;
+- Swagger em `/docs` e `/docs-json`.
 
 ## Branch Flow
 
@@ -90,13 +96,21 @@ GET https://dogs-api-dev.onrender.com/docs-json
 
 ## Deploy Prod
 
-Planejado:
+Configuração versionada em `render.yaml`:
 
-- branch `main`;
-- secrets do ambiente prod;
-- banco Supabase `dogs-prod`;
-- migrations aplicadas com cuidado;
-- Swagger público ou protegido por basic auth.
+```txt
+main -> dogs-api-prod -> Supabase dogs-prod
+```
+
+O build aplica migrations versionadas, executa o seed idempotente de raças e compila a API. As credenciais `sync: false` devem apontar exclusivamente para o projeto Supabase `dogs-prod`.
+
+Depois do deploy, valide:
+
+```txt
+GET https://dogs-api-prod.onrender.com/health
+GET https://dogs-api-prod.onrender.com/docs
+GET https://dogs-api-prod.onrender.com/docs-json
+```
 
 ## Migrations
 
@@ -122,7 +136,5 @@ Nunca colocar valores reais em:
 
 ## Decisões Pendentes
 
-- Política final de Swagger em produção.
-- Estratégia de migrations em produção.
 - Estratégia de email para convites.
-- Configuração de Supabase Auth por ambiente.
+- Proteção opcional do Swagger de produção com basic auth.
