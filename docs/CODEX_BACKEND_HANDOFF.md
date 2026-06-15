@@ -61,7 +61,7 @@ Stack recomendada:
 - Prisma ORM
 - PostgreSQL via Supabase
 - Supabase Storage
-- JWT com refresh token
+- Supabase Auth
 - Swagger/OpenAPI com `@nestjs/swagger`
 - Zod ou class-validator
 - Jest ou Vitest para testes
@@ -251,12 +251,9 @@ CORS_ORIGINS=http://localhost:5173
 DATABASE_URL=
 DIRECT_DATABASE_URL=
 
-JWT_ACCESS_SECRET=
-JWT_REFRESH_SECRET=
-ACCESS_TOKEN_TTL=15m
-REFRESH_TOKEN_TTL=30d
-
 SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_JWT_SECRET=
 SUPABASE_SERVICE_ROLE_KEY=
 SUPABASE_STORAGE_BUCKET=dogs-media
 
@@ -389,7 +386,7 @@ Conteúdo inicial recomendado:
 ## Projeto
 
 - Backend separado do frontend `react-dogs`.
-- Stack: Node.js, TypeScript, NestJS, Prisma, Supabase Postgres, Supabase Storage.
+- Stack: Node.js, TypeScript, NestJS, Prisma, Supabase Postgres, Supabase Storage, Supabase Auth.
 - API REST versionada em `/v1`.
 - Swagger em `/docs`.
 
@@ -426,14 +423,14 @@ Ordem inicial sugerida:
 4. Configurar Prisma e Supabase.
 5. Criar health check e Swagger.
 6. Criar módulo de configuração/env validation.
-7. Criar Auth com register/login/me/refresh/logout.
+7. Integrar Supabase Auth, guard, sync de perfil e me.
 8. Criar Users/me.
 9. Criar Breeds com seed.
 10. Criar Dogs e DogMembership.
 11. Criar convites de tutores.
 12. Criar Posts e Media.
 13. Criar feed público com filtros.
-14. Criar password reset.
+14. Configurar fluxos de Auth no Supabase quando necessário.
 15. Criar analytics/stats base.
 16. Criar deploy dev.
 17. Criar deploy prod.
@@ -451,7 +448,7 @@ Leia primeiro:
 - docs/BACKEND_API_PLAN.md
 - docs/CODEX_BACKEND_HANDOFF.md
 
-Quero criar uma API pública de portfólio usando Node.js, TypeScript, NestJS, Prisma, Supabase PostgreSQL, Supabase Storage e Swagger/OpenAPI.
+Quero criar uma API pública de portfólio usando Node.js, TypeScript, NestJS, Prisma, Supabase PostgreSQL, Supabase Storage, Supabase Auth e Swagger/OpenAPI.
 
 O frontend `react-dogs` já usa branch flow feature/* -> develop -> main, Husky, lint-staged, yarn validate, GitHub Actions, docs em docs/ e backlog local em docs/github-issues. Quero que este backend siga o mesmo padrão adaptado para API.
 

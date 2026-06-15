@@ -26,6 +26,10 @@ yarn format:check
 yarn typecheck
 yarn test
 yarn test:watch
+yarn prisma:generate
+yarn prisma:validate
+yarn prisma:migrate:dev
+yarn prisma:seed
 yarn validate
 ```
 
@@ -62,6 +66,12 @@ Arquivos staged passam por `lint-staged`:
 
 ## Servidor Local
 
+Crie seu arquivo local de env a partir do exemplo:
+
+```sh
+cp .env.example .env.local
+```
+
 ```sh
 yarn dev
 ```
@@ -72,7 +82,13 @@ URL padrão:
 http://localhost:3333
 ```
 
-Observação: nesta fase inicial ainda não há endpoint público implementado. O health check será criado em issue própria.
+Endpoints úteis:
+
+```txt
+GET /health
+GET /docs
+GET /docs-json
+```
 
 ## Branch Flow
 
@@ -113,3 +129,35 @@ Nunca versionar arquivos reais de ambiente:
 ```
 
 Versionar apenas `.env.example`.
+
+## Prisma
+
+Guia conceitual:
+
+```txt
+docs/PRISMA_GUIDE.md
+```
+
+Valide o schema sem precisar de banco real:
+
+```sh
+yarn prisma:validate
+```
+
+Gere o Prisma Client:
+
+```sh
+yarn prisma:generate
+```
+
+Para criar migrations locais, configure `DATABASE_URL` e `DIRECT_DATABASE_URL` no seu `.env.local` e rode:
+
+```sh
+yarn prisma:migrate:dev
+```
+
+Para executar o seed inicial de raças, rode:
+
+```sh
+yarn prisma:seed
+```

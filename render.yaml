@@ -1,0 +1,86 @@
+services:
+  - type: web
+    runtime: node
+    name: dogs-api-dev
+    repo: https://github.com/ArturRibeiro01/dogs-api
+    branch: develop
+    plan: free
+    region: virginia
+    autoDeployTrigger: checksPass
+    healthCheckPath: /health
+    buildCommand: yarn install --frozen-lockfile --production=false && yarn prisma:generate && yarn prisma:migrate:deploy && yarn prisma:seed && yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: NODE_ENV
+        value: production
+      - key: APP_ENV
+        value: dev
+      - key: API_BASE_URL
+        value: https://dogs-api-dev.onrender.com
+      - key: WEB_APP_URL
+        value: https://arturribeiro01.github.io/react-dogs/dev/
+      - key: CORS_ORIGINS
+        value: http://localhost:5173,https://arturribeiro01.github.io
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: dogs-media
+      - key: MAIL_PROVIDER
+        value: console
+      - key: MAIL_FROM
+        value: Dogs <no-reply@example.com>
+      - key: SWAGGER_ENABLED
+        value: 'true'
+
+  - type: web
+    runtime: node
+    name: dogs-api-prod
+    repo: https://github.com/ArturRibeiro01/dogs-api
+    branch: main
+    plan: free
+    region: virginia
+    autoDeployTrigger: checksPass
+    healthCheckPath: /health
+    buildCommand: yarn install --frozen-lockfile --production=false && yarn prisma:generate && yarn prisma:migrate:deploy && yarn prisma:seed && yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: NODE_ENV
+        value: production
+      - key: APP_ENV
+        value: prod
+      - key: API_BASE_URL
+        value: https://dogs-api-prod.onrender.com
+      - key: WEB_APP_URL
+        value: https://arturribeiro01.github.io/react-dogs/
+      - key: CORS_ORIGINS
+        value: https://arturribeiro01.github.io
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: dogs-media
+      - key: MAIL_PROVIDER
+        value: console
+      - key: MAIL_FROM
+        value: Dogs <no-reply@example.com>
+      - key: SWAGGER_ENABLED
+        value: 'true'

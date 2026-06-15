@@ -32,21 +32,27 @@ Versionar apenas:
 
 ## Autenticação Planejada
 
-- Access token JWT curto.
-- Refresh token opaco.
-- Refresh token salvo como hash no banco.
-- Rotação de refresh token.
-- Logout revogando token ativo.
-- Senhas com hash forte.
+- Supabase Auth gerencia cadastro, login, refresh token, password reset e provedores sociais.
+- Frontend autentica com Supabase Auth e envia `Authorization: Bearer <supabase_access_token>` para a Dogs API.
+- Dogs API valida o access token Supabase antes de endpoints privados.
+- Dogs API mantém apenas o perfil local `User`, vinculado por `supabaseAuthId`.
+- Dogs API não salva senha, refresh token ou token de recuperação.
+
+Provedores desejados no Supabase Auth:
+
+- email e senha;
+- Google;
+- Apple;
+- Azure (Microsoft).
 
 ## Rate Limit Planejado
 
 Aplicar rate limit em:
 
-- login;
-- recuperação de senha;
 - upload;
 - contact interests.
+
+Login e recuperação de senha ficam sob responsabilidade do Supabase Auth.
 
 ## Upload
 
@@ -83,6 +89,8 @@ Logs internos podem registrar contexto técnico, mas não devem conter:
 - senhas;
 - tokens;
 - refresh tokens;
+- Supabase anon key quando não for pública no contexto;
 - service role keys;
+- Supabase JWT secret;
 - connection strings;
 - payloads sensíveis completos.

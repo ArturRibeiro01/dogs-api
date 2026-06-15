@@ -34,6 +34,53 @@ Por padrão a aplicação sobe em:
 http://localhost:3333
 ```
 
+Endpoints de infraestrutura:
+
+```txt
+GET /health
+GET /docs
+GET /docs-json
+```
+
+Endpoints iniciais autenticados:
+
+```txt
+GET   /v1/auth/me
+POST  /v1/auth/sync
+GET   /v1/users/me
+PATCH /v1/users/me
+```
+
+Endpoints públicos de domínio:
+
+```txt
+GET /v1/breeds
+GET /v1/breeds/:slug
+GET /v1/dogs
+GET /v1/dogs/:slug
+GET /v1/posts
+GET /v1/posts/:postId
+```
+
+Endpoints autenticados de domínio:
+
+```txt
+POST   /v1/dogs
+PATCH  /v1/dogs/:dogId
+DELETE /v1/dogs/:dogId
+GET    /v1/dogs/:dogId/members
+POST   /v1/posts
+PATCH  /v1/posts/:postId
+DELETE /v1/posts/:postId
+POST   /v1/media
+```
+
+Os endpoints autenticados usam Supabase Auth. O frontend autentica no Supabase e envia o token para a Dogs API:
+
+```txt
+Authorization: Bearer <supabase_access_token>
+```
+
 ## Scripts
 
 ```sh
@@ -53,3 +100,7 @@ yarn start
 - `docs/ENVIRONMENTS.md`
 - `docs/SECURITY.md`
 - `docs/DEPLOYMENT.md`
+- `docs/PRISMA_GUIDE.md`
+- `docs/API_CONTRACT.md`
+- `docs/AUTH_STRATEGY.md`
+- `docs/http/README.md`

@@ -26,7 +26,7 @@ O perfil social principal é do cachorro, mas a gestão pertence a um ou mais tu
 - Prisma ORM
 - PostgreSQL via Supabase
 - Supabase Storage
-- JWT com refresh token
+- Supabase Auth
 - Swagger/OpenAPI
 
 ## Estrutura De Pastas
@@ -76,6 +76,7 @@ Database:
 
 - encapsula Prisma Client;
 - concentra integração com PostgreSQL.
+- expõe `PrismaService` por `DatabaseModule`.
 
 Common:
 
@@ -137,22 +138,68 @@ Erro:
 }
 ```
 
+Detalhes do contrato ficam em:
+
+```txt
+docs/API_CONTRACT.md
+```
+
 ## Módulos Planejados
 
 - `health`: status operacional.
-- `auth`: register, login, refresh, logout e usuário autenticado.
+- `auth`: validação de token Supabase, sync de perfil local e usuário autenticado.
 - `users`: perfil de tutor.
-- `breeds`: catálogo de raças.
-- `dogs`: perfis de cachorro e memberships.
-- `posts`: publicações no feed.
-- `media`: upload e metadados de arquivos.
+- `breeds`: catálogo público de raças.
+- `dogs`: perfis de cachorro, listagem pública e memberships iniciais.
+- `posts`: publicações, feed público e soft delete.
+- `media`: upload multipart, Supabase Storage e metadados de arquivos.
 - `favorites`: cachorros favoritados.
 - `contact-interests`: interesse de contato.
 - `analytics`: eventos e estatísticas.
 
 ## Fora Do Scaffold Atual
 
-- Prisma ainda não foi configurado.
-- Health check ainda não foi implementado.
-- Swagger ainda não foi configurado.
-- Autenticação ainda não foi implementada.
+- Provedores OAuth ainda não foram configurados no painel do Supabase.
+- Favorites e contact interests ainda não foram implementados.
+
+## Prisma
+
+Guia conceitual:
+
+```txt
+docs/PRISMA_GUIDE.md
+```
+
+O schema inicial está em:
+
+```txt
+prisma/schema.prisma
+```
+
+O seed inicial está em:
+
+```txt
+prisma/seed.ts
+```
+
+O `DatabaseModule` é usado pelos módulos que precisam do Prisma. O `PrismaService` não chama `$connect()` no bootstrap; o Prisma abre conexão de forma lazy quando uma query real é executada.
+
+## Autenticação
+
+Detalhes da decisão:
+
+```txt
+docs/AUTH_STRATEGY.md
+```
+
+Fluxo:
+
+```txt
+Frontend -> Supabase Auth -> access token
+Frontend -> Dogs API com Authorization: Bearer <token>
+Dogs API -> valida token Supabase
+Dogs API -> cria/atualiza perfil local User
+Dogs API -> aplica regras de domínio
+```
+
+Credenciais, social login, refresh token e password reset ficam no Supabase Auth. A Dogs API não salva senha nem tokens próprios.

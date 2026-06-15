@@ -1,0 +1,829 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-06-06T01:30:00.000Z",
+  "__export_source": "dogs-api",
+  "resources": [
+    {
+      "_id": "wrk_dogs_api",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs API",
+      "description": "Collection de desenvolvimento da Dogs API.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_dogs_api_base",
+      "_type": "environment",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3333",
+        "supabase_url": "https://replace-me.supabase.co",
+        "supabase_anon_key": "replace-me",
+        "auth_email": "test@dogs.dev",
+        "auth_password": "replace-me",
+        "access_token": "replace-me",
+        "breed_id": "replace-me",
+        "dog_id": "replace-me",
+        "dog_slug": "luke",
+        "post_id": "replace-me"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "supabase_url",
+          "supabase_anon_key",
+          "auth_email",
+          "auth_password",
+          "access_token",
+          "breed_id",
+          "dog_id",
+          "dog_slug",
+          "post_id"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1780709400000
+    },
+    {
+      "_id": "env_dogs_api_local",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:3333"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#2563eb",
+      "isPrivate": false,
+      "metaSortKey": 1780709400001
+    },
+    {
+      "_id": "env_dogs_api_dev",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dev",
+      "data": {
+        "base_url": "https://dev-api.example.com"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#16a34a",
+      "isPrivate": false,
+      "metaSortKey": 1780709400002
+    },
+    {
+      "_id": "env_dogs_api_prod",
+      "_type": "environment",
+      "parentId": "env_dogs_api_base",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Prod",
+      "data": {
+        "base_url": "https://api.example.com"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#dc2626",
+      "isPrivate": false,
+      "metaSortKey": 1780709400003
+    },
+    {
+      "_id": "fld_infra",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Infra",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100
+    },
+    {
+      "_id": "fld_supabase_auth",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Supabase Auth",
+      "description": "Requests diretos no Supabase Auth para obter token de teste.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200
+    },
+    {
+      "_id": "fld_dogs_auth",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs API - Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 300
+    },
+    {
+      "_id": "fld_users",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 400
+    },
+    {
+      "_id": "fld_breeds",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Breeds",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 500
+    },
+    {
+      "_id": "fld_dogs",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Dogs",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 600
+    },
+    {
+      "_id": "fld_posts",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Posts",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 700
+    },
+    {
+      "_id": "fld_media",
+      "_type": "request_group",
+      "parentId": "wrk_dogs_api",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "name": "Media",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 800
+    },
+    {
+      "_id": "req_health",
+      "_type": "request",
+      "parentId": "fld_infra",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/health",
+      "name": "GET /health",
+      "description": "Health check da Dogs API.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_openapi_json",
+      "_type": "request",
+      "parentId": "fld_infra",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/docs-json",
+      "name": "GET /docs-json",
+      "description": "OpenAPI JSON gerado pelo Swagger.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_supabase_login",
+      "_type": "request",
+      "parentId": "fld_supabase_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.supabase_url }}/auth/v1/token?grant_type=password",
+      "name": "POST password login",
+      "description": "Obtém access_token no Supabase Auth. Copie response.access_token para a variável access_token do ambiente.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.auth_email }}\",\n  \"password\": \"{{ _.auth_password }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "apikey",
+          "value": "{{ _.supabase_anon_key }}"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.supabase_anon_key }}"
+        }
+      ],
+      "authentication": {},
+      "scripts": {
+        "afterResponse": "insomnia.test('Supabase login returned access token', () => {\n  insomnia.expect(insomnia.response.code).to.eql(200);\n\n  const jsonBody = insomnia.response.json();\n  insomnia.expect(jsonBody.access_token).to.be.a('string');\n\n  insomnia.environment.set('access_token', jsonBody.access_token);\n\n  if (jsonBody.refresh_token) {\n    insomnia.environment.set('refresh_token', jsonBody.refresh_token);\n  }\n});"
+      },
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_auth_me",
+      "_type": "request",
+      "parentId": "fld_dogs_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/auth/me",
+      "name": "GET /v1/auth/me",
+      "description": "Retorna/cria o perfil local do usuário autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_auth_sync",
+      "_type": "request",
+      "parentId": "fld_dogs_auth",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/auth/sync",
+      "name": "POST /v1/auth/sync",
+      "description": "Sincroniza dados opcionais do perfil local.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"artur\",\n  \"name\": \"Artur Ribeiro\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_users_me",
+      "_type": "request",
+      "parentId": "fld_users",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/users/me",
+      "name": "GET /v1/users/me",
+      "description": "Retorna/cria o perfil local do tutor autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_users_patch_me",
+      "_type": "request",
+      "parentId": "fld_users",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/users/me",
+      "name": "PATCH /v1/users/me",
+      "description": "Atualiza campos editáveis do perfil local.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"artur_dev\",\n  \"name\": \"Artur Ribeiro\",\n  \"bio\": \"Tutor no Dogs.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_breeds_list",
+      "_type": "request",
+      "parentId": "fld_breeds",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/breeds",
+      "name": "GET /v1/breeds",
+      "description": "Lista raças ordenadas por nome.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_breeds_find_by_slug",
+      "_type": "request",
+      "parentId": "fld_breeds",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/breeds/golden-retriever",
+      "name": "GET /v1/breeds/:slug",
+      "description": "Busca uma raça pelo slug.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_dogs_create",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs",
+      "name": "POST /v1/dogs",
+      "description": "Cria cachorro e membership owner para o usuário autenticado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Luke\",\n  \"breedId\": \"{{ _.breed_id }}\",\n  \"sex\": \"male\",\n  \"size\": \"medium\",\n  \"weight\": 12.5,\n  \"bio\": \"Ama parques e caminhadas.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\",\n  \"interests\": [\"walks\", \"friendship\"],\n  \"isPublic\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_dogs_list",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs",
+      "name": "GET /v1/dogs",
+      "description": "Lista cachorros públicos com filtros opcionais.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "perPage",
+          "value": "12",
+          "disabled": false
+        },
+        {
+          "name": "breed",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "city",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "state",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "interest",
+          "value": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_dogs_find_by_slug",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_slug }}",
+      "name": "GET /v1/dogs/:slug",
+      "description": "Busca cachorro público pelo slug.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300
+    },
+    {
+      "_id": "req_dogs_update",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}",
+      "name": "PATCH /v1/dogs/:dogId",
+      "description": "Atualiza cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"bio\": \"Perfil atualizado pela Dogs API.\",\n  \"city\": \"Sao Paulo\",\n  \"state\": \"SP\",\n  \"interests\": [\"walks\", \"community\"],\n  \"isPublic\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 400
+    },
+    {
+      "_id": "req_dogs_members",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}/members",
+      "name": "GET /v1/dogs/:dogId/members",
+      "description": "Lista membros ativos do cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 500
+    },
+    {
+      "_id": "req_dogs_delete",
+      "_type": "request",
+      "parentId": "fld_dogs",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/dogs/{{ _.dog_id }}",
+      "name": "DELETE /v1/dogs/:dogId",
+      "description": "Remove cachorro quando o usuário autenticado é owner.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 600
+    },
+    {
+      "_id": "req_posts_create",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts",
+      "name": "POST /v1/posts",
+      "description": "Cria post para cachorro quando o usuário autenticado é owner ou editor.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"dogId\": \"{{ _.dog_id }}\",\n  \"caption\": \"Primeiro passeio no parque.\",\n  \"visibility\": \"public\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    },
+    {
+      "_id": "req_posts_list",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts",
+      "name": "GET /v1/posts",
+      "description": "Lista feed público com filtros opcionais.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "perPage",
+          "value": "12",
+          "disabled": false
+        },
+        {
+          "name": "dog",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "breed",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "city",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "state",
+          "value": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200
+    },
+    {
+      "_id": "req_posts_find_by_id",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "GET /v1/posts/:postId",
+      "description": "Busca post público pelo id.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300
+    },
+    {
+      "_id": "req_posts_update",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "PATCH /v1/posts/:postId",
+      "description": "Atualiza post quando o usuário autenticado pode gerenciar o cachorro.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"caption\": \"Legenda atualizada.\",\n  \"visibility\": \"public\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 400
+    },
+    {
+      "_id": "req_posts_delete",
+      "_type": "request",
+      "parentId": "fld_posts",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/posts/{{ _.post_id }}",
+      "name": "DELETE /v1/posts/:postId",
+      "description": "Remove post com soft delete.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 500
+    },
+    {
+      "_id": "req_media_upload",
+      "_type": "request",
+      "parentId": "fld_media",
+      "modified": 1780709400000,
+      "created": 1780709400000,
+      "url": "{{ _.base_url }}/v1/media",
+      "name": "POST /v1/media",
+      "description": "Upload multipart de imagem para post.",
+      "method": "POST",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "name": "postId",
+            "value": "{{ _.post_id }}",
+            "type": "text",
+            "disabled": false
+          },
+          {
+            "name": "file",
+            "value": "",
+            "type": "file",
+            "disabled": false
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100
+    }
+  ]
+}

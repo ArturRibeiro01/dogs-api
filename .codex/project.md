@@ -3,10 +3,11 @@
 ## Projeto
 
 - Backend separado do frontend `react-dogs`.
-- Stack planejada: Node.js, TypeScript, NestJS, Prisma, Supabase Postgres, Supabase Storage.
+- Stack planejada: Node.js, TypeScript, NestJS, Prisma, Supabase Postgres, Supabase Storage e Supabase Auth.
 - API REST versionada em `/v1`.
 - Swagger em `/docs` e OpenAPI JSON em `/docs-json`.
 - Health check em `/health`.
+- Autenticação planejada via Supabase Auth; Dogs API valida token Supabase e mantém perfil local.
 
 ## Comandos
 

@@ -44,7 +44,7 @@ jobs:
       - name: Validate Prisma schema
         run: |
           if [ -f prisma/schema.prisma ]; then
-            yarn prisma validate
+            yarn prisma:validate
           else
             echo "Prisma schema not found. Skipping Prisma validation."
           fi
